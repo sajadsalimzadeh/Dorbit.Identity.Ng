@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Injector, Input, Output} from '@angular/core';
-import {BaseComponent, TreeUtil} from "@dorbit";
+import {BaseComponent, TreeUtil} from "@framework";
 import {AccessRepository, PrivilegeSaveRequest, UserRepository} from "@identity";
 
 @Component({

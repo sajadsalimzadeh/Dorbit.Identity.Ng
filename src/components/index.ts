@@ -1,5 +1,5 @@
 import {NgModule} from '@angular/core';
-import {DorbitModule} from "@dorbit";
+import {DorbitModule} from "@framework";
 
 export const MODULES = [
   DorbitModule

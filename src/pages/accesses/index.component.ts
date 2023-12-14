@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {BaseDataComponent} from "@panel";
 import {AccessRepository} from "@identity";
-import {ODataQueryOptions, PagedListResult} from "@dorbit";
+import {ODataQueryOptions, PagedListResult} from "@framework";
 import {Observable} from "rxjs";
 
 @Component({

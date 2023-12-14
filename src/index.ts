@@ -4,7 +4,7 @@ import {LayoutService} from "./services/layout.service";
 import {Routes} from "@angular/router";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
-import {DorbitModule} from "@dorbit";
+import {DorbitModule} from "@framework";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 export * from './models';

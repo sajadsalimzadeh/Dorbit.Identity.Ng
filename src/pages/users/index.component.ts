@@ -1,5 +1,5 @@
 import {Component, Injector} from '@angular/core';
-import {ODataQueryOptions, PagedListResult} from "@dorbit";
+import {ODataQueryOptions, PagedListResult} from "@framework";
 import {UserRepository} from "../../repositories/user.repository";
 import {BaseDataComponent} from "@panel";
 import {Observable} from "rxjs";

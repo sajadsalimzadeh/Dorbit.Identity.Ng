@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseWriteRepository, CommandResult, QueryResult} from "@dorbit";
+import {BaseWriteRepository, CommandResult, QueryResult} from "@framework";
 
 export interface PrivilegeSaveRequest {
   startTime?: string;

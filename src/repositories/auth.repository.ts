@@ -1,5 +1,5 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseApiRepository, CommandResult, QueryResult} from "@dorbit";
+import {BaseApiRepository, CommandResult, QueryResult} from "@framework";
 import {LoginRequest, UserDto, UserLoginResponse} from "../models";
 
 @Injectable({providedIn: 'root'})
