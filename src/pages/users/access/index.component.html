@@ -1,0 +1,11 @@
+<d-tree class="bg-white" [items]="accesses" [expandKeys]="privilageAccesses">
+  <ng-template dTemplate="prepend" let-item>
+    <div class="checkbox-box">
+      <d-checkbox size="sm" [(ngModel)]="item.checked"></d-checkbox>
+    </div>
+  </ng-template>
+  <ng-template dTemplate let-item>
+    {{item.name}}
+  </ng-template>
+</d-tree>
+<d-button class="w-100 mt-3" (click)="save()">{{'save' | translate}}</d-button>

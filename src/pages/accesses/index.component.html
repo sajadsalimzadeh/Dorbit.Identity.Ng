@@ -1,0 +1,22 @@
+<app-panel-breadcrumb class="mb-3"></app-panel-breadcrumb>
+<div class="mb-3">
+  <d-button icon="far fa-plus" (click)="showDialog(addTpl, {title: 'افزودن دسترسی جدید در ریشه'})">افزودن دسترسی جدید در ریشه</d-button>
+</div>
+<d-tree [items]="data.items">
+  <ng-template dTemplate let-item>
+    {{item.name}}
+  </ng-template>
+  <ng-template dTemplate="append" let-item>
+    <div class="flex-row flex-gap-3">
+      <d-button mode="text" color="secondary" icon="far fa-plus"
+                (click)="showDialog(addTpl, {title: 'افزودن دسترسی جدید زیرمجموعه ی ' + item.name, context: {parentId: item.id}})"></d-button>
+    <d-button mode="text" color="warning" icon="far fa-pen-to-square"
+              (click)="showDialog(addTpl, {title: 'ویرایش دسترسی ' + item.name, context: item})"></d-button>
+    <d-button mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
+    </div>
+  </ng-template>
+</d-tree>
+
+<ng-template #addTpl let-dialog let-item="context">
+  <page-identity-accesses-form [model]="item" (onComplete)="dialog.close()"></page-identity-accesses-form>
+</ng-template>

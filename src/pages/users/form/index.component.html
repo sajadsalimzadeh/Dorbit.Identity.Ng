@@ -1,0 +1,23 @@
+<form class="flex-column flex-gap-2" [formGroup]="form" (submit)="save()" autocomplete="off">
+  <d-control-group [formControl]="form.controls.name" label="نام">
+    <d-input></d-input>
+  </d-control-group>
+  <d-control-group [formControl]="form.controls.username" label="نام کاربری">
+    <d-input></d-input>
+  </d-control-group>
+  <d-control-group [formControl]="form.controls.password" label="کلمه عبور" *ngIf="!form.controls.id.value">
+    <d-input type="password"></d-input>
+  </d-control-group>
+  <d-control-group [formControl]="form.controls.cellphone" label="شماره موبایل">
+    <d-input></d-input>
+  </d-control-group>
+  <d-control-group [formControl]="form.controls.email" label="ایمیل">
+    <d-input></d-input>
+  </d-control-group>
+  <div class="p-3">
+    <d-checkbox [formControl]="form.controls.needResetPassword">
+      نیاز به تغییر کلمه عبور دارد
+    </d-checkbox>
+  </div>
+  <d-button type="submit" [loading]="loadingService.loading">ذخیره</d-button>
+</form>
