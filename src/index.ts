@@ -1,6 +1,6 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
 import {BaseLayoutService} from "../../panel/src/services/base-layout.service";
-import {LayoutService} from "./services/layout.service";
+import {LayoutService} from "./services";
 import {Routes} from "@angular/router";
 import {HTTP_INTERCEPTORS} from "@angular/common/http";
 import {TokenInterceptor} from "./interceptors/token.interceptor";
@@ -8,6 +8,7 @@ import {DorbitModule} from "@framework";
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 export * from './models';
+export * from './guards';
 export * from './repositories';
 export * from './services';
 
