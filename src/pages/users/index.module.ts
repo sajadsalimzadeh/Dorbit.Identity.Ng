@@ -13,7 +13,9 @@ import {IdentitySharedModule} from "../../components";
     RouterModule.forChild([{path: '', component: IndexComponent}]),
     PanelSharedModule
   ],
-  exports: [],
+    exports: [
+        FormComponent
+    ],
   declarations: [IndexComponent, FormComponent, AccessComponent],
   providers: [],
 })
