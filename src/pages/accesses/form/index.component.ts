@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
-import {BaseFormComponent} from "@panel";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AccessRepository} from "@identity";
+import {BaseFormComponent} from "@panel";
+import {AccessRepository} from "../../../repositories";
 
 @Component({
   selector: 'page-identity-accesses-form',

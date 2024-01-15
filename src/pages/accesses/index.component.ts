@@ -1,8 +1,8 @@
 import {Component, Injector} from '@angular/core';
-import {BaseDataComponent} from "@panel";
-import {AccessRepository} from "@identity";
-import {ODataQueryOptions, PagedListResult} from "@framework";
 import {Observable} from "rxjs";
+import {BaseDataComponent} from "@panel";
+import {ODataQueryOptions, PagedListResult} from "@framework";
+import {AccessRepository} from "../../repositories";
 
 @Component({
   selector: 'page-identity-accesses',

@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
 import {BasePanelComponent} from "@panel";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthRepository, UserRepository} from "@identity";
+import {UserRepository} from "../../repositories";
 
 @Component({
   selector: 'page-identity-change-password',

@@ -2,31 +2,22 @@ import {ModuleWithProviders, NgModule} from '@angular/core';
 import {BaseLayoutService} from "../../panel/src/services/base-layout.service";
 import {LayoutService} from "./services";
 import {Routes} from "@angular/router";
-import {HTTP_INTERCEPTORS} from "@angular/common/http";
-import {TokenInterceptor} from "./interceptors/token.interceptor";
 import {DorbitModule} from "@framework";
-import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
-export * from './models';
+export * from './contracts';
 export * from './guards';
 export * from './repositories';
 export * from './services';
 
+export * from './pages/auth/index.module';
 export * from './pages/users/options';
 
 interface Configs {
-  loginPath: string;
 }
 
 @NgModule({
-  imports: [
-    DorbitModule,
-  ],
-  exports: [
-    DorbitModule,
-  ],
-  declarations: [],
-  providers: [],
+  imports: [DorbitModule],
+  exports: [DorbitModule],
 })
 export class IdentityModule {
   static readonly route_prefix = 'identity';
@@ -40,15 +31,13 @@ export class IdentityModule {
     ]
   }
 
-  static forRoot(configs: Configs): ModuleWithProviders<IdentityModule> {
-    this.configs = configs;
+  static forRoot(configs?: Configs): ModuleWithProviders<IdentityModule> {
+    this.configs = configs ?? {};
 
     return {
       ngModule: IdentityModule,
       providers: [
         {provide: BaseLayoutService, useClass: LayoutService, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
-        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true}
       ]
     }
   }

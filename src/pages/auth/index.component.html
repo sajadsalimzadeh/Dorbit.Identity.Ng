@@ -1,7 +1,7 @@
 <div class="login-box">
   <div class="card-box">
     <div class="logo-box">
-      <img class="logo" src="assets/images/logo-dark.png" alt="logo"/>
+      <img class="logo" [src]="'assets/images/logo-'+theme+'.png'" alt="logo"/>
     </div>
     <form class="flex-column" (submit)="submit()">
       <d-control-group size="lg" [formControl]="form.controls.username" label="نام کاربری">

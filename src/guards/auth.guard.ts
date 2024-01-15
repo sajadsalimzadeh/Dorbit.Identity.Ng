@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthRepository} from "../repositories/auth.repository";
-import {IdentityModule} from "@identity";
 import {PanelService} from "../../../panel/src/services/panel.service";
 
 @Injectable({providedIn: 'root'})
@@ -31,6 +30,6 @@ export class AuthGuard implements CanActivate {
   }
 
   private async gotoLoginPage() {
-    await this.router.navigate([IdentityModule.configs.loginPath]);
+    await this.router.navigate(['/auth']);
   }
 }

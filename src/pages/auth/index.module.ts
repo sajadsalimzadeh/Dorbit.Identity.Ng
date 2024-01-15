@@ -2,7 +2,6 @@ import {NgModule} from '@angular/core';
 import {RouterModule} from "@angular/router";
 
 import {IndexComponent} from './index.component';
-import {FormComponent} from "./form/index.component";
 import {IdentitySharedModule} from "../../components";
 
 @NgModule({
@@ -10,7 +9,7 @@ import {IdentitySharedModule} from "../../components";
     IdentitySharedModule,
     RouterModule.forChild([{path: '', component: IndexComponent}]),
   ],
-  declarations: [IndexComponent, FormComponent],
+  declarations: [IndexComponent],
 })
-export class IndexModule {
+export class PageAuthModule {
 }

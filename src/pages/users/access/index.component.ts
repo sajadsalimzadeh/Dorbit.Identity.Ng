@@ -1,9 +1,9 @@
 import {Component, EventEmitter, Injector, Input, Output} from '@angular/core';
-import {BaseComponent, TreeUtil} from "@framework";
-import {AccessRepository, PrivilegeSaveRequest, UserRepository} from "@identity";
+import {BaseComponent} from "@framework";
+import {AccessRepository, PrivilegeSaveRequest, UserRepository} from "../../../repositories";
 
 @Component({
-  selector: 'page-identity-users-access',
+  selector: 'app-access',
   templateUrl: 'index.component.html',
   styleUrls: ['./index.component.scss']
 })
@@ -14,7 +14,7 @@ export class AccessComponent extends BaseComponent {
   @Output() onComplete = new EventEmitter<void>();
 
   accesses: any[] = [];
-  privilageAccesses: string[] = [];
+  privilegeAccesses: string[] = [];
 
   constructor(injector: Injector, private accessRepository: AccessRepository, private userRepository: UserRepository) {
     super(injector);
@@ -33,7 +33,7 @@ export class AccessComponent extends BaseComponent {
 
   load() {
     this.userRepository.getPrivileges(this.model.id).subscribe(res => {
-      this.privilageAccesses = res.data ?? [];
+      this.privilegeAccesses = res.data ?? [];
       this.process();
     });
   }
@@ -46,9 +46,9 @@ export class AccessComponent extends BaseComponent {
   }
 
   process() {
-    console.log(this.accesses, this.privilageAccesses)
+    console.log(this.accesses, this.privilegeAccesses)
     this.accesses.forEach(x => {
-        x.checked = this.privilageAccesses.includes(x.name.toLowerCase());
+        x.checked = this.privilegeAccesses.includes(x.name.toLowerCase());
     });
   }
 }

@@ -1,9 +1,9 @@
-<panel-breadcrumb class="mb-3"></panel-breadcrumb>
+<panel-breadcrumb></panel-breadcrumb>
 <d-table [data]="data">
-  <ng-template dTemplate="caption">
+  <ng-template dTableTemplate="caption">
     <d-button icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})">افزودن کاربر جدید</d-button>
   </ng-template>
-  <ng-template dTemplate="header,footer">
+  <ng-template dTableTemplate="header,footer">
     <tr>
       <th>#</th>
       <th>نام</th>
@@ -16,7 +16,7 @@
       <th class="text-align-center" width="10">عملیات</th>
     </tr>
   </ng-template>
-  <ng-template dTemplate="body" let-item let-index="index">
+  <ng-template dTableTemplate="body" let-item let-index="index">
     <tr>
       <td>{{ index }}</td>
       <td>{{ item.name }}</td>
@@ -46,7 +46,7 @@
         <div class="flex-center flex-gap-3">
           <ng-container *ngFor="let option of userOptions">
             <d-button mode="text" [color]="option.color" [icon]="option.icon"
-                      (click)="showDialogByComponent(option.component, {title: option.title, context: {user:item}})"></d-button>
+                      (click)="showDialogByComponent(option.component, {user:item}, option.dialog)"></d-button>
           </ng-container>
           <d-button mode="text" color="secondary" icon="far fa-shield-halved"
                     (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})"></d-button>
@@ -64,5 +64,5 @@
 </ng-template>
 
 <ng-template #accessTpl let-dialog let-item="context">
-  <page-identity-users-access [model]="item" (onComplete)="dialog.close()"></page-identity-users-access>
+  <app-access [model]="item" (onComplete)="dialog.close()"></app-access>
 </ng-template>

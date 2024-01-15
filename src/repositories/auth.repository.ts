@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {BaseApiRepository, CommandResult, QueryResult} from "@framework";
-import {LoginRequest, UserDto, UserLoginResponse} from "../models";
+import {LoginRequest, UserDto, UserLoginResponse} from "../contracts";
 
 @Injectable({providedIn: 'root'})
 export class AuthRepository extends BaseApiRepository {
