@@ -12,6 +12,8 @@ export * from './guards';
 export * from './repositories';
 export * from './services';
 
+export * from './pages/users/options';
+
 interface Configs {
   loginPath: string;
 }

@@ -1,8 +1,9 @@
-import {Component, Injector} from '@angular/core';
+import {Component, Inject, Injector} from '@angular/core';
 import {ODataQueryOptions, PagedListResult} from "@framework";
 import {UserRepository} from "../../repositories/user.repository";
 import {BaseDataComponent} from "@panel";
 import {Observable} from "rxjs";
+import {USER_OPTION, UserOption} from "./options";
 
 @Component({
   selector: 'page-identity-users',
@@ -11,8 +12,13 @@ import {Observable} from "rxjs";
 })
 export class IndexComponent extends BaseDataComponent {
 
-  constructor(injector: Injector, repository: UserRepository) {
+  constructor(
+    injector: Injector,
+    repository: UserRepository,
+    @Inject(USER_OPTION) protected userOptions: UserOption[]
+    ) {
     super(injector, repository);
+    console.log(userOptions)
   }
 
   protected override loader(query: ODataQueryOptions): Observable<PagedListResult> {

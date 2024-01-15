@@ -3,7 +3,7 @@ import {HttpInterceptor, HttpEvent, HttpHandler, HttpRequest, HttpErrorResponse}
 import {catchError, Observable, throwError} from 'rxjs';
 import {Router} from "@angular/router";
 
-export const BEARER_TOKEN = new InjectionToken<() => string>('CSRF Token')
+export const BEARER_TOKEN = new InjectionToken<() => string>('BEARER_TOKEN')
 
 @Injectable({providedIn: 'root'})
 export class AuthInterceptor implements HttpInterceptor {
