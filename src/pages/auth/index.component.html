@@ -1,0 +1,29 @@
+<div class="login-box">
+  <div class="card-box">
+    <div class="logo-box">
+      <img class="logo" src="assets/images/logo-dark.png" alt="logo"/>
+    </div>
+    <form class="flex-column" (submit)="submit()">
+      <d-control-group size="lg" [formControl]="form.controls.username" label="نام کاربری">
+        <d-input></d-input>
+      </d-control-group>
+      <d-control-group size="lg" [formControl]="form.controls.value" label="رمز عبور">
+        <d-input type="password"></d-input>
+      </d-control-group>
+      <!--      <div class="captcha-box">-->
+      <!--        <d-control-group size="lg" [formControl]="form.controls.captcha" label="کد امنیتی">-->
+      <!--          <d-input></d-input>-->
+      <!--        </d-control-group>-->
+      <!--        <div class="captcha-image"></div>-->
+      <!--      </div>-->
+      <div class="mt-5">
+        <d-button size="lg" type="submit" class="w-100" [loading]="loadingService.loading">
+          ورود
+        </d-button>
+      </div>
+      <a class="text-align-center color-link mt-5">رمز خود را فراموش کرده ام</a>
+    </form>
+  </div>
+</div>
+
+<d-message-container position="top-center" size="lg"></d-message-container>
