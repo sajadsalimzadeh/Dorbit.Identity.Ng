@@ -11,7 +11,7 @@ import {UserRepository} from "../../../repositories/user.repository";
 export class FormComponent extends BaseFormComponent {
 
   form = new FormGroup({
-    id: new FormControl('', []),
+    id: new FormControl(null, []),
     name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)]),

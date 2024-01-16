@@ -10,6 +10,7 @@ export interface UserDto {
   isTwoFactorAuthenticationEnable: boolean;
   needResetPassword: boolean;
   isActive: boolean;
+  accesses: string[];
 }
 
 export enum UserLoginStrategy {

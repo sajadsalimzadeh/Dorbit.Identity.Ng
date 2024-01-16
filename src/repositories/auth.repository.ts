@@ -1,11 +1,15 @@
 import {Injectable, Injector} from '@angular/core';
 import {BaseApiRepository, CommandResult, QueryResult} from "@framework";
 import {LoginRequest, UserDto, UserLoginResponse} from "../contracts";
+import {BehaviorSubject, tap} from "rxjs";
+import {PanelService} from "@panel";
 
 @Injectable({providedIn: 'root'})
 export class AuthRepository extends BaseApiRepository {
 
-  constructor(injector: Injector) {
+  $user = new BehaviorSubject<UserDto | undefined>(undefined);
+
+  constructor(injector: Injector, private panelService: PanelService) {
     super(injector, 'Auth');
   }
 
@@ -18,6 +22,9 @@ export class AuthRepository extends BaseApiRepository {
   }
 
   isLogin() {
-    return this.http.get<QueryResult<UserDto>>('IsLogin');
+    return this.http.get<QueryResult<UserDto>>('IsLogin').pipe(tap(res => {
+      this.$user.next(res.data);
+      this.panelService.$accesses.next(res.data?.accesses ?? []);
+    }));
   }
 }

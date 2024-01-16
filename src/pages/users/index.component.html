@@ -1,7 +1,9 @@
 <panel-breadcrumb></panel-breadcrumb>
 <d-table [data]="data">
   <ng-template dTableTemplate="caption">
-    <d-button icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})">افزودن کاربر جدید</d-button>
+    <d-button icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})" *auth="'User'">
+      افزودن کاربر جدید
+    </d-button>
   </ng-template>
   <ng-template dTableTemplate="header,footer">
     <tr>
@@ -45,14 +47,14 @@
       <td>
         <div class="flex-center flex-gap-3">
           <ng-container *ngFor="let option of userOptions">
-            <d-button mode="text" [color]="option.color" [icon]="option.icon"
+            <d-button *auth="option.accesses" mode="text" [color]="option.color" [icon]="option.icon"
                       (click)="showDialogByComponent(option.component, {user:item}, option.dialog)"></d-button>
           </ng-container>
-          <d-button mode="text" color="secondary" icon="far fa-shield-halved"
+          <d-button *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-shield-halved"
                     (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})"></d-button>
-          <d-button mode="text" color="warning" icon="far fa-pen-to-square"
+          <d-button *auth="'User'" mode="text" color="warning" icon="far fa-pen-to-square"
                     (click)="showDialog(formTpl, {title: 'ویرایش کاربر ' + item.name, context: item})"></d-button>
-          <d-button mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
+          <d-button *auth="'User'" mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
         </div>
       </td>
     </tr>

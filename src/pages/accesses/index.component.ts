@@ -16,6 +16,7 @@ export class IndexComponent extends BaseDataComponent {
   }
 
   protected override loader(query: ODataQueryOptions): Observable<PagedListResult> {
+    query.setOrder('Name')
     return this.repository.select(query);
   }
 }

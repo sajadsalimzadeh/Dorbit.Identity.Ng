@@ -6,6 +6,7 @@ export interface UserOption {
   color: Colors;
   component: Type<any>;
   dialog?: DialogOptions;
+  accesses?: string[];
 }
 
 export const USER_OPTION = new InjectionToken<UserOption>('USER_OPTION');
