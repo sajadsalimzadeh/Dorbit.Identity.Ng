@@ -1,5 +1,5 @@
 import {Component, Inject, Injector} from '@angular/core';
-import {Observable} from "rxjs";
+import {Observable, tap} from "rxjs";
 import {ODataQueryOptions, PagedListResult} from "@framework";
 import {UserRepository} from "../../repositories/user.repository";
 import {BaseDataComponent} from "@panel";
@@ -16,11 +16,15 @@ export class IndexComponent extends BaseDataComponent {
     injector: Injector,
     repository: UserRepository,
     @Inject(USER_OPTION) protected userOptions: UserOption[]
-    ) {
+  ) {
     super(injector, repository);
   }
 
   protected override loader(query: ODataQueryOptions): Observable<PagedListResult> {
-    return this.repository.select(query);
+    return this.repository.select(query).pipe(tap(res => {
+      res.data?.forEach(x => {
+        x.isAdmin = x.accesses?.map((x: string) => x.toLowerCase())?.includes('admin')
+      })
+    }));
   }
 }

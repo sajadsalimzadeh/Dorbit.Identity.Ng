@@ -12,7 +12,7 @@ export class IndexComponent extends BasePanelComponent {
 
   form = new FormGroup({
     oldPassword: new FormControl('', [Validators.required]),
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(8)]),
+    newPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
     renewPassword: new FormControl('', [Validators.required]),
   });
 

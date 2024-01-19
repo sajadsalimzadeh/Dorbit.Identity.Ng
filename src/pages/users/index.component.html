@@ -15,6 +15,7 @@
       <th class="text-align-center" width="10">ورود دو مرحله ای</th>
       <th class="text-align-center" width="10">نیاز به تغییر رمز</th>
       <th class="text-align-center" width="10">فعال</th>
+      <th class="text-align-center" width="10">مدیر</th>
       <th class="text-align-center" width="10">عملیات</th>
     </tr>
   </ng-template>
@@ -43,6 +44,9 @@
         <div class="flex-center">
           <span [ngClass]="(item.isActive ? 'color-success' : 'color-danger')">{{ item.isActive ? 'بله' : 'خیر' }}</span>
         </div>
+      </td>
+      <td>
+        <i *ngIf="item.isAdmin" class="far fa-crown color-warning"></i>
       </td>
       <td>
         <div class="flex-center flex-gap-3">
