@@ -1,4 +1,4 @@
-import {Component, Inject, Injector} from '@angular/core';
+import {Component, Inject, Injector, Optional} from '@angular/core';
 import {Observable, tap} from "rxjs";
 import {ODataQueryOptions, PagedListResult} from "@framework";
 import {UserRepository} from "../../repositories/user.repository";
@@ -15,7 +15,7 @@ export class IndexComponent extends BaseDataComponent {
   constructor(
     injector: Injector,
     repository: UserRepository,
-    @Inject(USER_OPTION) protected userOptions: UserOption[]
+    @Inject(USER_OPTION) @Optional() protected userOptions: UserOption[]
   ) {
     super(injector, repository);
   }

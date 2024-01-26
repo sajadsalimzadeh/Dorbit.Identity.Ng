@@ -4,15 +4,15 @@
 </div>
 <d-tree [items]="data.items">
   <ng-template dTemplate let-item>
-    {{item.name}}
+    {{ item.name }}
   </ng-template>
   <ng-template dTemplate="append" let-item>
     <div class="flex-row flex-gap-3">
-      <d-button mode="text" color="secondary" icon="far fa-plus"
+      <d-button size="sm" mode="text" color="secondary" icon="far fa-plus"
                 (click)="showDialog(addTpl, {title: 'افزودن دسترسی جدید زیرمجموعه ی ' + item.name, context: {parentId: item.id}})"></d-button>
-    <d-button mode="text" color="warning" icon="far fa-pen-to-square"
-              (click)="showDialog(addTpl, {title: 'ویرایش دسترسی ' + item.name, context: item})"></d-button>
-    <d-button mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
+      <d-button size="sm" mode="text" color="warning" icon="far fa-pen-to-square"
+                (click)="showDialog(addTpl, {title: 'ویرایش دسترسی ' + item.name, context: item})"></d-button>
+      <d-button size="sm" mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
     </div>
   </ng-template>
 </d-tree>

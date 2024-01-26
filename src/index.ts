@@ -23,11 +23,11 @@ export class IdentityModule {
   static readonly route_prefix = 'identity';
   static configs: Configs;
 
-  static getRoutes(): Routes {
+  static getRoutes(data?: any): Routes {
     return [
-      {path: `${this.route_prefix}/users`, loadChildren: () => import('./pages/users/index.module').then(x => x.IndexModule)},
-      {path: `${this.route_prefix}/accesses`, loadChildren: () => import('./pages/accesses/index.module').then(x => x.IndexModule)},
-      {path: `${this.route_prefix}/change-password`, loadChildren: () => import('./pages/change-password/index.module').then(x => x.IndexModule)},
+      {path: `users`, loadChildren: () => import('./pages/users/index.module').then(x => x.IndexModule), data: data},
+      {path: `accesses`, loadChildren: () => import('./pages/accesses/index.module').then(x => x.IndexModule), data: data},
+      {path: `change-password`, loadChildren: () => import('./pages/change-password/index.module').then(x => x.IndexModule), data: data},
     ]
   }
 

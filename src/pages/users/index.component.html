@@ -21,47 +21,53 @@
   </ng-template>
   <ng-template dTableTemplate="body" let-item let-index="index">
     <tr>
-      <td>{{ index }}</td>
-      <td>{{ item.name }}</td>
-      <td>{{ item.username }}</td>
-      <td>{{ item.cellphone }}</td>
-      <td>{{ item.email }}</td>
-      <td>
+      <td title="ردیف">{{ index }}</td>
+      <td title="نام">{{ item.name }}</td>
+      <td title="نام کاربری">{{ item.username }}</td>
+      <td title="شماره موبایل">{{ item.cellphone }}</td>
+      <td title="ایمیل">{{ item.email }}</td>
+      <td title="ورود دو مرحله ای">
         <div class="flex-center">
           <span [ngClass]="(item.isTwoFactorAuthenticationEnable ? 'color-success' : 'color-danger')">
             {{ item.isTwoFactorAuthenticationEnable ? 'بله' : 'خیر' }}
           </span>
         </div>
       </td>
-      <td>
+      <td title="نیاز به تغییر رمز">
         <div class="flex-center">
           <span [ngClass]="(item.needResetPassword ? 'color-success' : 'color-danger')">
             {{ item.needResetPassword ? 'بله' : 'خیر' }}
           </span>
         </div>
       </td>
-      <td>
+      <td title="فعال">
         <div class="flex-center">
           <span [ngClass]="(item.isActive ? 'color-success' : 'color-danger')">{{ item.isActive ? 'بله' : 'خیر' }}</span>
         </div>
       </td>
-      <td>
+      <td title="مدیر">
         <i *ngIf="item.isAdmin" class="far fa-crown color-warning"></i>
       </td>
-      <td>
-        <div class="flex-center flex-gap-3">
+      <td class="operation-cell">
+        <div class="w-100 flex-center flex-gap-3">
           <ng-container *ngFor="let option of userOptions">
-            <d-button *auth="option.accesses" mode="text" [color]="option.color" [icon]="option.icon"
+            <d-button size="sm" *auth="option.accesses" mode="text" [color]="option.color" [icon]="option.icon"
                       (click)="showDialogByComponent(option.component, {user:item}, option.dialog)"></d-button>
           </ng-container>
-          <d-button *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-shield-halved"
-                    (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})"></d-button>
-          <d-button *auth="'User'" mode="text" color="warning" icon="far fa-pen-to-square"
-                    (click)="showDialog(formTpl, {title: 'ویرایش کاربر ' + item.name, context: item})"></d-button>
-          <d-button *auth="'User'" mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
+          <d-button size="sm" *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-shield-halved"
+                    (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})">دسترسی ها</d-button>
+          <d-button size="sm" *auth="'User'" mode="text" color="warning" icon="far fa-pen-to-square"
+                    (click)="showDialog(formTpl, {title: 'ویرایش کاربر ' + item.name, context: item})">ویرایش</d-button>
+          <d-button size="sm" *auth="'User'" mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)">حذف</d-button>
         </div>
       </td>
     </tr>
+  </ng-template>
+  <ng-template dTableTemplate="detail">
+    <div>
+      <label>شماره موبایل</label>
+      <span></span>
+    </div>
   </ng-template>
 </d-table>
 
