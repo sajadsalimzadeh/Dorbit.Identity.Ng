@@ -1,9 +1,13 @@
 <panel-breadcrumb></panel-breadcrumb>
 <d-table [data]="data">
   <ng-template dTableTemplate="caption">
-    <d-button icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})" *auth="'User'">
-      افزودن کاربر جدید
-    </d-button>
+    <div class="flex-row flex-align-center flex-gap-2">
+      <d-button size="sm" color="link" icon="far fa-refresh" (click)="load()"></d-button>
+      <d-button size="sm" icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})" *auth="'User'">
+        افزودن کاربر جدید
+      </d-button>
+      <d-input [formControl]="searchControl" placeholder="جستجو"></d-input>
+    </div>
   </ng-template>
   <ng-template dTableTemplate="header,footer">
     <tr>
@@ -11,7 +15,7 @@
       <th>نام</th>
       <th>نام کاربری</th>
       <th>شماره موبایل</th>
-      <th>ایمیل</th>
+      <th class="hidden-lt-md">ایمیل</th>
       <th class="text-align-center" width="10">ورود دو مرحله ای</th>
       <th class="text-align-center" width="10">نیاز به تغییر رمز</th>
       <th class="text-align-center" width="10">فعال</th>
@@ -25,7 +29,7 @@
       <td title="نام">{{ item.name }}</td>
       <td title="نام کاربری">{{ item.username }}</td>
       <td title="شماره موبایل">{{ item.cellphone }}</td>
-      <td title="ایمیل">{{ item.email }}</td>
+      <td title="ایمیل" class="hidden-lt-md">{{ item.email }}</td>
       <td title="ورود دو مرحله ای">
         <div class="flex-center">
           <span [ngClass]="(item.isTwoFactorAuthenticationEnable ? 'color-success' : 'color-danger')">
@@ -49,16 +53,30 @@
         <i *ngIf="item.isAdmin" class="far fa-crown color-warning"></i>
       </td>
       <td class="operation-cell">
-        <div class="w-100 flex-center flex-gap-3">
+        <div class="w-100 flex-row flex-justify-end flex-gap-3">
           <ng-container *ngFor="let option of userOptions">
-            <d-button size="sm" *auth="option.accesses" mode="text" [color]="option.color" [icon]="option.icon"
-                      (click)="showDialogByComponent(option.component, {user:item}, option.dialog)"></d-button>
+            <d-button
+              size="sm"
+              mode="text"
+              [icon]="option.icon"
+              [color]="option.color"
+              *auth="option.accesses"
+              (click)="showUserOption(option, item)"
+            >{{ option.text ? (option.text | translate) : null }}</d-button>
           </ng-container>
-          <d-button size="sm" *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-shield-halved"
-                    (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})">دسترسی ها</d-button>
-          <d-button size="sm" *auth="'User'" mode="text" color="warning" icon="far fa-pen-to-square"
-                    (click)="showDialog(formTpl, {title: 'ویرایش کاربر ' + item.name, context: item})">ویرایش</d-button>
-          <d-button size="sm" *auth="'User'" mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)">حذف</d-button>
+          <d-button size="sm" *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-key"
+                    (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})">
+          </d-button>
+          <ng-container *auth="'User'">
+            <d-button size="sm" *ngIf="!item.isActive" mode="text" color="success" icon="far fa-wave-pulse" (click)="active(item)">
+            </d-button>
+            <d-button size="sm" *ngIf="item.isActive" mode="text" color="danger" icon="far fa-ban" (click)="deActive(item)">
+            </d-button>
+            <d-button size="sm" mode="text" color="warning" icon="far fa-pen-to-square"
+                      (click)="showDialog(formTpl, {title: 'ویرایش کاربر ' + item.name, context: item})">
+            </d-button>
+            <d-button size="sm" mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
+          </ng-container>
         </div>
       </td>
     </tr>

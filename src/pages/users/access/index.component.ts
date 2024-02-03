@@ -46,7 +46,6 @@ export class AccessComponent extends BaseComponent {
   }
 
   process() {
-    console.log(this.accesses, this.privilegeAccesses)
     this.accesses.forEach(x => {
         x.checked = this.privilegeAccesses.includes(x.name.toLowerCase());
     });

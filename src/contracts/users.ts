@@ -27,6 +27,12 @@ export interface LoginRequest {
   loginStrategy: UserLoginStrategy;
 }
 
+export interface LoginWithCodeRequest {
+  otpId: string;
+  loginStrategy: UserLoginStrategy;
+  code: string;
+}
+
 export interface UserLoginResponse {
   otpId: string;
   loginStrategy: UserLoginStrategy;

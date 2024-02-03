@@ -14,7 +14,7 @@ export class FormComponent extends BaseFormComponent {
     id: new FormControl(null, []),
     name: new FormControl('', [Validators.required]),
     username: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+    password: new FormControl('', [Validators.required, Validators.minLength(3)]),
     cellphone: new FormControl('', [Validators.minLength(11), Validators.maxLength(11)]),
     email: new FormControl('', [Validators.email]),
     needResetPassword: new FormControl(false),
