@@ -1,6 +1,6 @@
-import {Component, Inject, Injector, Optional} from '@angular/core';
+import {Component, Inject, Injector, Optional, TemplateRef, ViewChild} from '@angular/core';
 import {Observable, tap} from "rxjs";
-import {debounce, ODataQueryOptions, PagedListResult} from "@framework";
+import {debounce, DialogRef, ODataQueryOptions, PagedListResult} from "@framework";
 import {UserRepository} from "../../repositories/user.repository";
 import {BaseDataComponent} from "@panel";
 import {USER_OPTION, UserOption} from "./options";
@@ -13,6 +13,9 @@ import {FormControl} from "@angular/forms";
 })
 export class IndexComponent extends BaseDataComponent {
 
+  @ViewChild('filterTpl') filterTpl!: TemplateRef<any>;
+
+  filterDialog?: DialogRef;
   searchControl = new FormControl('');
 
   constructor(
@@ -43,19 +46,38 @@ export class IndexComponent extends BaseDataComponent {
     }));
   }
 
-  deActive(item: any) {
-    return this.userRepository.deActive(item.id).subscribe(res => {
-      this.load();
-    });
+  active(item: any) {
+    this.dialogService.prompt({message: 'پیام برای کاربر'}, {title: 'فعال کردن'}).then(e => {
+      if (!e.result) return;
+      return this.userRepository.active({id: item.id, message: e.value}).subscribe(res => {
+        this.load();
+        e.dialog.close();
+      });
+    })
   }
 
-  active(item: any) {
-    return this.userRepository.active(item.id).subscribe(res => {
-      this.load();
-    });
+  deActive(item: any) {
+    this.dialogService.prompt({message: 'پیام برای کاربر'}, {title: 'غیرفعال کردن'}).then(e => {
+      if (!e.result) return;
+      return this.userRepository.deActive({id: item.id, message: e.value}).subscribe(res => {
+        this.load();
+        e.dialog.close();
+      });
+    })
   }
 
   showUserOption(option: UserOption, item: any) {
     this.showDialogByComponent(option.component, {user: item}, option.dialog);
+  }
+
+  showMessage(item: any) {
+    this.dialogService.prompt({message: 'پیام برای کاربر', value: item.message}, {title: 'تنظیم پیام کاربر'}).then(e => {
+      if (e.result) {
+        this.userRepository.setMessage({id: item.id, message: e.value}).subscribe(res => {
+          this.load();
+          e.dialog.close();
+        });
+      }
+    });
   }
 }

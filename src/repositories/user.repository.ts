@@ -23,7 +23,6 @@ export class UserRepository extends BaseWriteRepository {
   override getAll(): Observable<PagedListResult> {
     return super.getAll().pipe(tap(res => {
       res.data?.forEach(x => {
-        x.value = x.id;
         x.text = `${x.name} (${x.username})`;
       })
     }));
@@ -49,11 +48,16 @@ export class UserRepository extends BaseWriteRepository {
     return this.http.post<QueryResult<string[]>>(`${id}/Privileges`, request);
   }
 
-  deActive(id: string) {
-    return this.http.post<QueryResult<string[]>>(`${id}/DeActive`, {});
+  deActive(req: any) {
+    return this.http.post<QueryResult<string[]>>(`${req.id}/DeActive`, req);
   }
 
-  active(id: string) {
-    return this.http.post<QueryResult<string[]>>(`${id}/Active`, {});
+  active(req: any) {
+    return this.http.post<QueryResult<string[]>>(`${req.id}/Active`, req);
   }
+
+    setMessage(req: any) {
+    return this.http.post<QueryResult>(`${req.id}/Message`, req);
+  }
+
 }
