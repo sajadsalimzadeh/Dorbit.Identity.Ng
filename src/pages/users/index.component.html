@@ -18,7 +18,7 @@
       <th class="hidden-lt-md">ایمیل</th>
       <th class="text-align-center" width="10">ورود دو مرحله ای</th>
       <th class="text-align-center" width="10">نیاز به تغییر رمز</th>
-      <th class="text-align-center" width="10">فعال</th>
+      <th class="text-align-center" width="10">وضعیت</th>
       <th class="text-align-center" width="10">مدیر</th>
       <th class="text-align-center" width="10">عملیات</th>
     </tr>
@@ -44,9 +44,11 @@
           </span>
         </div>
       </td>
-      <td title="فعال">
+      <td title="وضعیت">
         <div class="flex-center">
-          <span [ngClass]="(item.isActive ? 'color-success' : 'color-danger')">{{ item.isActive ? 'بله' : 'خیر' }}</span>
+          <span [ngClass]="(item.isActive ? 'color-success' : 'color-danger')">
+            {{ item.isActive ? 'فعال' : 'غیر فعال' }}
+          </span>
         </div>
       </td>
       <td title="مدیر">
