@@ -1,7 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {BaseWriteRepository, CommandResult, ODataQueryOptions, PagedListResult, QueryResult} from "@framework";
 import {Observable, tap} from "rxjs";
-import {query} from "@angular/animations";
 
 export interface PrivilegeSaveRequest {
   startTime?: string;

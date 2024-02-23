@@ -55,7 +55,7 @@
         <i *ngIf="item.isAdmin" class="far fa-crown color-warning"></i>
       </td>
       <td class="operation-cell">
-        <div class="w-100 flex-row flex-justify-end flex-gap-2">
+        <div class="w-100 flex-row flex-justify-end flex-wrap flex-gap-2">
           <ng-container *ngFor="let option of userOptions">
             <d-button
               size="sm"
@@ -66,7 +66,7 @@
               (click)="showUserOption(option, item)"
             >{{ option.text ? (option.text | translate) : null }}</d-button>
           </ng-container>
-          <d-button size="sm" *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-key"
+          <d-button size="sm" *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-shield-keyhole"
                     (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})"></d-button>
           <ng-container *auth="'User-Active'">
             <d-button size="sm" *ngIf="!item.isActive" mode="text" color="success" icon="far fa-wave-pulse" (click)="active(item)"></d-button>

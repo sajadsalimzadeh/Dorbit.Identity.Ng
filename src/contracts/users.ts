@@ -13,7 +13,7 @@ export interface UserDto {
   accesses: string[];
 }
 
-export enum UserLoginStrategy {
+export enum LoginStrategy {
   None = 0,
   StaticPassword = 1,
   Cellphone = 2,
@@ -24,18 +24,18 @@ export enum UserLoginStrategy {
 export interface LoginRequest {
   username: string;
   value: string;
-  loginStrategy: UserLoginStrategy;
+  loginStrategy: LoginStrategy;
 }
 
 export interface LoginWithCodeRequest {
   otpId: string;
-  loginStrategy: UserLoginStrategy;
+  loginStrategy: LoginStrategy;
   code: string;
 }
 
 export interface UserLoginResponse {
   otpId: string;
-  loginStrategy: UserLoginStrategy;
+  loginStrategy: LoginStrategy;
 
   token: TokenResponse;
 }
