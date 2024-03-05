@@ -2,10 +2,8 @@
 <d-table [data]="data">
   <ng-template dTableTemplate="caption">
     <div class="flex-row flex-align-center flex-gap-2">
-      <d-button size="sm" color="link" icon="far fa-refresh" (click)="load()"></d-button>
-      <d-button size="sm" icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})" *auth="'User'">
-        افزودن کاربر جدید
-      </d-button>
+<!--      <d-button size="sm" color="link" icon="far fa-refresh" (click)="load()"></d-button>-->
+      <d-button size="sm" icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})" *auth="'User'"></d-button>
       <d-input [formControl]="searchControl" placeholder="جستجو"></d-input>
     </div>
   </ng-template>
@@ -15,46 +13,47 @@
       <th>نام</th>
       <th>نام کاربری</th>
       <th>شماره موبایل</th>
-      <th class="hidden-lt-md">ایمیل</th>
-      <th class="text-align-center" width="10">ورود دو مرحله ای</th>
-      <th class="text-align-center" width="10">نیاز به تغییر رمز</th>
-      <th class="text-align-center" width="10">وضعیت</th>
-      <th class="text-align-center" width="10">مدیر</th>
-      <th class="text-align-center" width="10">عملیات</th>
+      <th class="sm-detail">ایمیل</th>
+      <th class="sm-detail text-align-center" width="10">ورود دو مرحله ای</th>
+      <th class="sm-detail text-align-center" width="10">نیاز به تغییر رمز</th>
+      <th class="sm-detail text-align-center" width="10">وضعیت</th>
+      <th class="sm-detail text-align-center" width="10">مدیر</th>
+      <th class="sm-detail text-align-center" width="10">عملیات</th>
     </tr>
   </ng-template>
   <ng-template dTableTemplate="body" let-item let-index="index">
     <tr>
+      <td><d-table-row-expander [item]="item"></d-table-row-expander></td>
       <td title="ردیف">{{ index }}</td>
       <td title="نام">{{ item.name }}</td>
       <td title="نام کاربری">{{ item.username }}</td>
-      <td title="شماره موبایل">{{ item.cellphone }}</td>
-      <td title="ایمیل" class="hidden-lt-md">{{ item.email }}</td>
-      <td title="ورود دو مرحله ای">
+      <td class="sm-detail" title="شماره موبایل">{{ item.cellphone }}</td>
+      <td class="sm-detail" title="ایمیل">{{ item.email }}</td>
+      <td class="sm-detail" title="ورود دو مرحله ای">
         <div class="flex-center">
           <span [ngClass]="(item.isTwoFactorAuthenticationEnable ? 'color-success' : 'color-danger')">
             {{ item.isTwoFactorAuthenticationEnable ? 'بله' : 'خیر' }}
           </span>
         </div>
       </td>
-      <td title="نیاز به تغییر رمز">
+      <td class="sm-detail" title="نیاز به تغییر رمز">
         <div class="flex-center">
           <span [ngClass]="(item.needResetPassword ? 'color-success' : 'color-danger')">
             {{ item.needResetPassword ? 'بله' : 'خیر' }}
           </span>
         </div>
       </td>
-      <td title="وضعیت">
+      <td class="sm-detail" title="وضعیت">
         <div class="flex-center">
           <span [ngClass]="(item.isActive ? 'color-success' : 'color-danger')">
             {{ item.isActive ? 'فعال' : 'غیر فعال' }}
           </span>
         </div>
       </td>
-      <td title="مدیر">
+      <td class="sm-detail" title="مدیر">
         <i *ngIf="item.isAdmin" class="far fa-crown color-warning"></i>
       </td>
-      <td class="operation-cell">
+      <td class="sm-detail operation-cell">
         <div class="w-100 flex-row flex-justify-end flex-wrap flex-gap-2">
           <ng-container *ngFor="let option of userOptions">
             <d-button
