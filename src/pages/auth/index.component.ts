@@ -5,6 +5,7 @@ import {AuthRepository} from "../../repositories";
 import {LoginRequest} from "../../contracts";
 import {AuthService} from "../../services";
 import {panelStore} from "../../../../panel/src/stores";
+import {LoginStrategy} from "@app/contracts";
 
 @Component({
   selector: 'page-auth',
@@ -21,6 +22,7 @@ export class IndexComponent extends BaseComponent {
     username: new FormControl(''),
     value: new FormControl(''),
     captcha: new FormControl(''),
+    loginStrategy: new FormControl(LoginStrategy.StaticPassword),
   });
 
   constructor(
