@@ -2,10 +2,9 @@ import {Component, HostBinding, Injector} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {BaseComponent} from "@framework";
 import {AuthRepository} from "../../repositories";
-import {LoginRequest} from "../../contracts";
+import {LoginRequest, LoginStrategy} from "../../contracts";
 import {AuthService} from "../../services";
 import {panelStore} from "../../../../panel/src/stores";
-import {LoginStrategy} from "@app/contracts";
 
 @Component({
   selector: 'page-auth',
