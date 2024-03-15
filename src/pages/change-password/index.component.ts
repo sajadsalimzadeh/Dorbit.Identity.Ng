@@ -23,7 +23,7 @@ export class IndexComponent extends BasePanelComponent {
 
   submit() {
     if(this.form.invalid) return this.messages.formInvalid();
-    this.userRepository.changePassword(this.form.value).subscribe(res => {
+    this.userRepository.ownChangePassword(this.form.value).subscribe(res => {
       this.router.navigate(['/'])
     })
   }

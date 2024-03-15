@@ -31,8 +31,12 @@ export class UserRepository extends BaseWriteRepository {
     return this.http.get<QueryResult>('Own');
   }
 
-  changePassword(req: any) {
-    return this.http.post<CommandResult>('ChangePassword', req);
+  ownChangePassword(req: any) {
+    return this.http.post<CommandResult>('Own/ChangePassword', req);
+  }
+
+  resetPassword(req: any) {
+    return this.http.post<CommandResult>(`${req.id}/ResetPassword`, req);
   }
 
   editOwn(req: any) {
@@ -55,7 +59,7 @@ export class UserRepository extends BaseWriteRepository {
     return this.http.post<QueryResult<string[]>>(`${req.id}/Active`, req);
   }
 
-    setMessage(req: any) {
+  setMessage(req: any) {
     return this.http.post<QueryResult>(`${req.id}/Message`, req);
   }
 

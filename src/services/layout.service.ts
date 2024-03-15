@@ -9,8 +9,8 @@ export class LayoutService extends BaseLayoutService {
     return [
       {
         icon: 'far fa-user-group-simple', text: 'سیستم مدیریت کاربران', children: [
-          {text: 'کاربران سیستم', link: `/${IdentityModule.route_prefix}/users`, accesses: ['User-Read']},
-          {text: 'دسترسی ها', link: `/${IdentityModule.route_prefix}/accesses`, accesses: ['Access-Read']},
+          {text: 'کاربران سیستم', link: `users`, accesses: ['User-Read']},
+          {text: 'دسترسی ها', link: `accesses`, accesses: ['Access-Read']},
         ]
       },
     ];

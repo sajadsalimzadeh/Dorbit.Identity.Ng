@@ -1,0 +1,6 @@
+<form [formGroup]="form" (submit)="save()">
+  <d-control-group formControlName="password" label="کلمه عبور جدید">
+    <d-input dir="ltr"></d-input>
+  </d-control-group>
+  <d-button class="w-100 mt-3" type="submit" [loading]="loadingService.loading">{{ 'save' | translate }}</d-button>
+</form>

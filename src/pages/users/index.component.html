@@ -23,7 +23,6 @@
   </ng-template>
   <ng-template dTableTemplate="body" let-item let-index="index">
     <tr>
-      <td><d-table-row-expander [item]="item"></d-table-row-expander></td>
       <td title="ردیف">{{ index }}</td>
       <td title="نام">{{ item.name }}</td>
       <td title="نام کاربری">{{ item.username }}</td>
@@ -67,6 +66,9 @@
           </ng-container>
           <d-button size="sm" *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-shield-keyhole"
                     (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})"></d-button>
+          <ng-container *auth="'User-ResetPassword'">
+            <d-button size="sm" mode="text" color="primary" icon="far fa-key" (click)="showDialog(resetPasswordTpl, {title: 'تغییر کلمه عبور', context: item})"></d-button>
+          </ng-container>
           <ng-container *auth="'User-Active'">
             <d-button size="sm" *ngIf="!item.isActive" mode="text" color="success" icon="far fa-wave-pulse" (click)="active(item)"></d-button>
           </ng-container>
@@ -91,4 +93,8 @@
 
 <ng-template #accessTpl let-dialog let-item="context">
   <app-access [model]="item" (onComplete)="dialog.close()"></app-access>
+</ng-template>
+
+<ng-template #resetPasswordTpl let-dialog let-item="context">
+  <app-reset-password [model]="item" (onComplete)="dialog.close()"></app-reset-password>
 </ng-template>
