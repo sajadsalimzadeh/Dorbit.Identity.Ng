@@ -5,6 +5,7 @@ import {IndexComponent} from './index.component';
 import {FormComponent} from "./form/index.component";
 import {AccessComponent} from "./access/index.component";
 import {IdentitySharedModule} from "../../components";
+import {ResetPasswordComponent} from "./reset-password/index.component";
 
 @NgModule({
   imports: [
@@ -12,7 +13,7 @@ import {IdentitySharedModule} from "../../components";
     RouterModule.forChild([{path: '', component: IndexComponent}]),
   ],
   exports: [FormComponent],
-  declarations: [IndexComponent, FormComponent, AccessComponent],
+  declarations: [IndexComponent, FormComponent, AccessComponent, ResetPasswordComponent],
   providers: [],
 })
 export class IndexModule {
