@@ -2,13 +2,16 @@ import {Component, EventEmitter, Injector, Input, Output} from '@angular/core';
 import {UserRepository} from "../../../repositories";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {BasePanelComponent} from "@panel";
+import {IdentitySharedModule} from "../../../components";
 
 @Component({
-  selector: 'app-reset-password',
+  standalone: true,
+  imports: [IdentitySharedModule],
+  selector: 'app-user-reset-password',
   templateUrl: 'index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class ResetPasswordComponent extends BasePanelComponent {
+export class UserResetPasswordComponent extends BasePanelComponent {
 
   @Input({required: true}) model: any;
 

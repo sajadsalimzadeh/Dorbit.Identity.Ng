@@ -88,13 +88,13 @@
 </d-table>
 
 <ng-template #formTpl let-dialog let-item="context">
-  <app-form [model]="item" (onComplete)="dialog.close()"></app-form>
+  <app-user-form [model]="item" (onComplete)="dialog.close()"></app-user-form>
 </ng-template>
 
 <ng-template #accessTpl let-dialog let-item="context">
-  <app-access [model]="item" (onComplete)="dialog.close()"></app-access>
+  <app-user-access [model]="item" (onComplete)="dialog.close()"></app-user-access>
 </ng-template>
 
 <ng-template #resetPasswordTpl let-dialog let-item="context">
-  <app-reset-password [model]="item" (onComplete)="dialog.close()"></app-reset-password>
+  <app-user-reset-password [model]="item" (onComplete)="dialog.close()"></app-user-reset-password>
 </ng-template>

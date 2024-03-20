@@ -2,13 +2,17 @@ import {Component, Injector} from '@angular/core';
 import {BaseFormComponent} from "@panel";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRepository} from "../../../repositories/user.repository";
+import {IdentitySharedModule} from "../../../components";
+import {UserResetPasswordComponent} from "../reset-password/index.component";
 
 @Component({
-  selector: 'app-form',
+  standalone: true,
+  imports: [IdentitySharedModule],
+  selector: 'app-user-form',
   templateUrl: 'index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class FormComponent extends BaseFormComponent {
+export class UserFormComponent extends BaseFormComponent {
 
   form = new FormGroup({
     id: new FormControl(null, []),

@@ -1,13 +1,17 @@
 import {Component, EventEmitter, Injector, Input, Output} from '@angular/core';
 import {BaseComponent} from "@framework";
 import {AccessRepository, PrivilegeSaveRequest, UserRepository} from "../../../repositories";
+import {IdentitySharedModule} from "../../../components";
+import {UserResetPasswordComponent} from "../reset-password/index.component";
 
 @Component({
-  selector: 'app-access',
+  standalone: true,
+  imports: [IdentitySharedModule],
+  selector: 'app-user-access',
   templateUrl: 'index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class AccessComponent extends BaseComponent {
+export class UserAccessComponent extends BaseComponent {
 
   @Input({required: true}) model: any;
 

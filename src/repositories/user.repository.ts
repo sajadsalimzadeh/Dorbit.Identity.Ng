@@ -19,6 +19,10 @@ export class UserRepository extends BaseWriteRepository {
     return super.select(query);
   }
 
+  search(req: {search: any, code: any}): Observable<PagedListResult> {
+    return this.http.get<PagedListResult>(`Search`, {params: req});
+  }
+
   override getAll(): Observable<PagedListResult> {
     return super.getAll().pipe(tap(res => {
       res.data?.forEach(x => {

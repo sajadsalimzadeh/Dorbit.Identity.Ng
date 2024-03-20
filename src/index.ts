@@ -25,7 +25,7 @@ export class IdentityModule {
 
   static getRoutes(data?: any): Routes {
     return [
-      {path: `users`, loadChildren: () => import('./pages/users/index.module').then(x => x.IndexModule), data: data},
+      {path: `users`, loadChildren: () => import('./pages/users/index.module').then(x => x.UsersModule), data: data},
       {path: `accesses`, loadChildren: () => import('./pages/accesses/index.module').then(x => x.IndexModule), data: data},
       {path: `change-password`, loadChildren: () => import('./pages/change-password/index.module').then(x => x.IndexModule), data: data},
     ]

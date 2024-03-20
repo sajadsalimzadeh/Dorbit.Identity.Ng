@@ -3,16 +3,16 @@
     <d-input></d-input>
   </d-control-group>
   <d-control-group [formControl]="form.controls.username" label="نام کاربری">
-    <d-input></d-input>
+    <d-input dir="ltr"></d-input>
   </d-control-group>
   <d-control-group [formControl]="form.controls.password" label="کلمه عبور" *ngIf="!form.controls.id.value">
-    <d-input></d-input>
+    <d-input dir="ltr"></d-input>
   </d-control-group>
   <d-control-group [formControl]="form.controls.cellphone" label="شماره موبایل">
-    <d-input></d-input>
+    <d-input dir="ltr"></d-input>
   </d-control-group>
   <d-control-group [formControl]="form.controls.email" label="ایمیل">
-    <d-input></d-input>
+    <d-input dir="ltr"></d-input>
   </d-control-group>
   <div class="p-3">
     <d-checkbox [formControl]="form.controls.needResetPassword">
