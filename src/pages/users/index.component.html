@@ -1,11 +1,11 @@
 <panel-breadcrumb></panel-breadcrumb>
 <d-table [data]="data">
   <ng-template dTableTemplate="caption">
-    <div class="flex-row flex-align-center flex-gap-2">
+    <form class="flex-row flex-align-center flex-gap-2" [formGroup]="filterForm">
 <!--      <d-button size="sm" color="link" icon="far fa-refresh" (click)="load()"></d-button>-->
       <d-button size="sm" icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})" *auth="'User'"></d-button>
-      <d-input [formControl]="searchControl" placeholder="جستجو"></d-input>
-    </div>
+      <d-input formControlName="search" placeholder="جستجو"></d-input>
+    </form>
   </ng-template>
   <ng-template dTableTemplate="header,footer">
     <tr>

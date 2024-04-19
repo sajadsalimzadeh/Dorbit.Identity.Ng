@@ -4,15 +4,17 @@ import {debounce, ODataQueryOptions, PagedListResult} from "@framework";
 import {UserRepository} from "../../repositories/user.repository";
 import {BaseDataComponent} from "@panel";
 import {USER_OPTION, UserOption} from "./options";
-import {FormControl} from "@angular/forms";
+import {FormControl, FormGroup} from "@angular/forms";
 
 @Directive()
 export class BaseUsersComponent extends BaseDataComponent {
 
   @ViewChild('filterTpl') filterTpl!: TemplateRef<any>;
 
-  searchControl = new FormControl('');
-  codeControl = new FormControl('');
+  filterForm = new FormGroup({
+    search: new FormControl(''),
+    code: new FormControl(''),
+  });
 
   $items = new Subject<any[]>();
 
@@ -26,16 +28,13 @@ export class BaseUsersComponent extends BaseDataComponent {
   override ngOnInit() {
     super.ngOnInit();
 
-    this.subscription.add(this.searchControl.valueChanges.subscribe(e => {
+    this.subscription.add(this.filterForm.valueChanges.subscribe(e => {
       debounce(() => this.load(), 300);
     }));
   }
 
   protected override loader(query: ODataQueryOptions): Observable<PagedListResult> {
-    return this.userRepository.search({
-      search: this.searchControl.value,
-      code: this.codeControl.value
-    }).pipe(tap(res => {
+    return this.userRepository.search(this.filterForm.value as any).pipe(tap(res => {
       const items = res.data ?? [];
       items.forEach(x => {
         x.isAdmin = x.accesses?.map((x: string) => x.toLowerCase())?.includes('admin')
