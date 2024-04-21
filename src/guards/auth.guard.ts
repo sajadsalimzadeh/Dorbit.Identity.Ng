@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthRepository} from "../repositories/auth.repository";
 import {PanelService} from "../../../panel/src/services/panel.service";
-import {base64encode, CryptoUtil, DialogService} from "@framework";
+import {base64encode, CryptoUtil, DialogService, MessageService} from "@framework";
 import {IdentityMessageComponent} from "../components/message/index.component";
 
 @Injectable({providedIn: 'root'})
@@ -11,6 +11,7 @@ export class AuthGuard implements CanActivate {
     private panelService: PanelService,
     private dialogService: DialogService,
     private authRepository: AuthRepository,
+    private messageService: MessageService,
     private router: Router) {
   }
 
@@ -29,8 +30,8 @@ export class AuthGuard implements CanActivate {
           }
         },
         error: e => {
-          this.gotoLoginPage();
-          reject(e)
+          this.messageService.danger('message.authentication-failed');
+          reject(e);
         }
       })
     })
