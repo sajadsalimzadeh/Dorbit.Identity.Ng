@@ -3,7 +3,7 @@
     <d-input></d-input>
   </d-control-group>
   <d-control-group [formControl]="form.controls.username" label="نام کاربری">
-    <d-input dir="ltr"></d-input>
+    <d-input dir="ltr" inputMode="numeric"></d-input>
   </d-control-group>
   <d-control-group [formControl]="form.controls.password" label="کلمه عبور" *ngIf="!form.controls.id.value">
     <d-input dir="ltr"></d-input>
