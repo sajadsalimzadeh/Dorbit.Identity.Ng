@@ -20,7 +20,6 @@ interface Configs {
   exports: [DorbitModule],
 })
 export class IdentityModule {
-  static readonly route_prefix = 'identity';
   static configs: Configs;
 
   static getRoutes(data?: any): Routes {

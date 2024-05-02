@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {BaseLayoutService, MenuItem} from "../../../panel/src/services/base-layout.service";
-import {IdentityModule} from "../index";
 
 @Injectable()
 export class LayoutService extends BaseLayoutService {
@@ -18,7 +17,7 @@ export class LayoutService extends BaseLayoutService {
 
   override async getProfileMenus(): Promise<MenuItem[]> {
     return [
-      {icon: 'fal fa-key', text: 'تغییر کلمه عبور', link: `/${IdentityModule.route_prefix}/change-password`},
+      {icon: 'fal fa-key', text: 'تغییر کلمه عبور', link: `/change-password`},
     ];
   }
 

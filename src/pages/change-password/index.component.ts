@@ -2,6 +2,7 @@ import {Component, Injector} from '@angular/core';
 import {BasePanelComponent} from "@panel";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRepository} from "../../repositories";
+import {LoginStrategy} from "@identity";
 
 @Component({
   selector: 'page-identity-change-password',
@@ -11,9 +12,10 @@ import {UserRepository} from "../../repositories";
 export class IndexComponent extends BasePanelComponent {
 
   form = new FormGroup({
-    oldPassword: new FormControl('', [Validators.required]),
-    newPassword: new FormControl('', [Validators.required, Validators.minLength(4)]),
+    value: new FormControl('', [Validators.required]),
+    newPassword: new FormControl('', [Validators.required]),
     renewPassword: new FormControl('', [Validators.required]),
+    strategy: new FormControl(LoginStrategy.StaticPassword, [Validators.required]),
   });
 
 
@@ -22,9 +24,10 @@ export class IndexComponent extends BasePanelComponent {
   }
 
   submit() {
-    if(this.form.invalid) return this.messages.formInvalid();
+    if (this.form.invalid) return this.messages.formInvalid();
     this.userRepository.ownChangePassword(this.form.value).subscribe(res => {
-      this.router.navigate(['/'])
+      this.form.reset();
+      this.messages.success();
     })
   }
 }

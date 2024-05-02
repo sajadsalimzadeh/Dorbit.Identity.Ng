@@ -1,7 +1,7 @@
 <panel-breadcrumb></panel-breadcrumb>
 <div class="container">
   <form class="card" [formGroup]="form" (submit)="submit()">
-    <d-control-group formControlName="oldPassword" label="کلمه عبور قدیم">
+    <d-control-group formControlName="value" label="کلمه عبور قدیم">
       <d-input type="password"></d-input>
     </d-control-group>
     <d-control-group formControlName="newPassword" label="کلمه عبور جدید">
@@ -11,7 +11,7 @@
       <d-input type="password"></d-input>
     </d-control-group>
     <div class="mt-3">
-      <d-button type="submit">ذخیره</d-button>
+      <d-button class="w-100" type="submit" [loading]="loadingService.loading">ذخیره</d-button>
     </div>
   </form>
 </div>
