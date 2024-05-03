@@ -22,6 +22,7 @@ export class UserFormComponent extends BaseFormComponent {
     cellphone: new FormControl('', [Validators.minLength(11), Validators.maxLength(11)]),
     email: new FormControl('', [Validators.email]),
     needResetPassword: new FormControl(false),
+    activeTokenCount: new FormControl(1, [Validators.required, Validators.max(65000)]),
   });
 
   constructor(injector: Injector, repository: UserRepository) {
@@ -32,10 +33,8 @@ export class UserFormComponent extends BaseFormComponent {
     super.ngOnInit();
 
     if (this.form.controls.id.value) {
-      this.form.controls.username.disable();
       this.form.controls.password.disable();
     } else {
-      this.form.controls.username.enable();
       this.form.controls.password.enable();
     }
   }

@@ -1,21 +1,24 @@
 <form class="flex-column flex-gap-2" [formGroup]="form" (submit)="submit()" autocomplete="off">
-  <d-control-group [formControl]="form.controls.name" label="نام">
+  <d-control-group formControlName="name" label="نام">
     <d-input></d-input>
   </d-control-group>
-  <d-control-group [formControl]="form.controls.username" label="نام کاربری">
+  <d-control-group formControlName="username" label="نام کاربری">
     <d-input dir="ltr" inputMode="numeric"></d-input>
   </d-control-group>
-  <d-control-group [formControl]="form.controls.password" label="کلمه عبور" *ngIf="!form.controls.id.value">
+  <d-control-group formControlName="password" label="کلمه عبور" *ngIf="!form.controls.id.value">
     <d-input dir="ltr"></d-input>
   </d-control-group>
-  <d-control-group [formControl]="form.controls.cellphone" label="شماره موبایل">
+  <d-control-group formControlName="cellphone" label="شماره موبایل">
+    <d-input dir="ltr" inputMode="numeric"></d-input>
+  </d-control-group>
+  <d-control-group formControlName="email" label="ایمیل">
     <d-input dir="ltr"></d-input>
   </d-control-group>
-  <d-control-group [formControl]="form.controls.email" label="ایمیل">
-    <d-input dir="ltr"></d-input>
+  <d-control-group formControlName="activeTokenCount" label="تعداد دستگاه های لاگین شده هم زمان">
+    <d-input type="number"></d-input>
   </d-control-group>
   <div class="p-3">
-    <d-checkbox [formControl]="form.controls.needResetPassword">
+    <d-checkbox formControlName="needResetPassword">
       نیاز به تغییر کلمه عبور دارد
     </d-checkbox>
   </div>
