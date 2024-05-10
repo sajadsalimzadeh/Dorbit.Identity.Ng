@@ -2,8 +2,9 @@ import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthRepository} from "../repositories/auth.repository";
 import {PanelService} from "../../../panel/src/services/panel.service";
-import {base64encode, CryptoUtil, DialogService, MessageService} from "@framework";
+import {CryptoUtil, DialogService, MessageService} from "@framework";
 import {IdentityMessageComponent} from "../components/message/index.component";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
@@ -12,6 +13,7 @@ export class AuthGuard implements CanActivate {
     private dialogService: DialogService,
     private authRepository: AuthRepository,
     private messageService: MessageService,
+    private translateService: TranslateService,
     private router: Router) {
   }
 
@@ -30,7 +32,7 @@ export class AuthGuard implements CanActivate {
           }
         },
         error: e => {
-          this.messageService.danger('message.authentication-failed');
+          this.messageService.danger(this.translateService.instant('message.authentication-failed'));
           reject(e);
         }
       })
