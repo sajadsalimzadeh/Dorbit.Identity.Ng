@@ -47,7 +47,8 @@ export class AuthGuard implements CanActivate {
         this.dialogService.open({
           title: 'پیام از طرف مدیر',
           width: '100%',
-          position: 'bottom-center',
+          maxWidth: '500px',
+          position: 'middle-center',
           context: {user: user},
           component: IdentityMessageComponent
         });
