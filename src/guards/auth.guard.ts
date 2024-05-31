@@ -20,7 +20,6 @@ export class AuthGuard implements CanActivate {
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return new Promise<boolean>((resolve, reject) => {
       this.panelService.$loading.next(true);
-      console.log('here')
       this.authRepository.isLogin().subscribe({
         next: res => {
           this.panelService.$loading.next(false);
