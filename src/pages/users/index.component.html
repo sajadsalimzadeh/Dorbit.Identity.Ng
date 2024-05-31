@@ -2,7 +2,7 @@
 <d-table [data]="data">
   <ng-template dTableTemplate="caption">
     <form class="flex-row flex-align-center flex-gap-2" [formGroup]="filterForm">
-<!--      <d-button size="sm" color="link" icon="far fa-refresh" (click)="load()"></d-button>-->
+      <!--      <d-button size="sm" color="link" icon="far fa-refresh" (click)="load()"></d-button>-->
       <d-button size="sm" icon="far fa-plus" (click)="showDialog(formTpl, {title: 'افزودن کاربر جدید'})" *auth="'User'"></d-button>
       <d-input formControlName="search" placeholder="جستجو"></d-input>
     </form>
@@ -60,26 +60,40 @@
               mode="text"
               [icon]="option.icon"
               [color]="option.color"
+              [dTooltip]="option.tooltip"
               *auth="option.accesses"
               (click)="showUserOption(option, item)"
-            >{{ option.text ? (option.text | translate) : null }}</d-button>
+            >{{ option.text ? (option.text | translate) : null }}
+            </d-button>
           </ng-container>
-          <d-button size="sm" *auth="['Access-Read','Privilege-Read']" mode="text" color="secondary" icon="far fa-shield-keyhole"
-                    (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})"></d-button>
+          <d-button
+            *auth="['Access-Read','Privilege-Read']" size="sm" mode="text" color="secondary" icon="far fa-shield-keyhole" dTooltip="دسترسی ها"
+            (click)="showDialog(accessTpl, {title: 'دسترسی کاربر ' + item.name, context: item})"></d-button>
           <ng-container *auth="'User-ResetPassword'">
-            <d-button size="sm" mode="text" color="primary" icon="far fa-key" (click)="showDialog(resetPasswordTpl, {title: 'تغییر کلمه عبور', context: item})"></d-button>
+            <d-button
+              size="sm" mode="text" color="primary" icon="far fa-key" dTooltip="تغییر کلمه عبور"
+              (click)="showDialog(resetPasswordTpl, {title: 'تغییر کلمه عبور', context: item})"></d-button>
           </ng-container>
           <ng-container *auth="'User-Active'">
-            <d-button size="sm" *ngIf="!item.isActive" mode="text" color="success" icon="far fa-wave-pulse" (click)="active(item)"></d-button>
+            <d-button
+              *ngIf="!item.isActive" size="sm" mode="text" color="success" icon="far fa-wave-pulse" dTooltip="فعالسازی"
+              (click)="active(item)"></d-button>
           </ng-container>
           <ng-container *auth="'User-DeActive'">
-            <d-button size="sm" *ngIf="item.isActive" mode="text" color="danger" icon="far fa-ban" (click)="deActive(item)"></d-button>
+            <d-button
+              *ngIf="item.isActive" size="sm" mode="text" color="danger" icon="far fa-ban" dTooltip="غیرفعالسازی"
+              (click)="deActive(item)"></d-button>
           </ng-container>
-          <d-button *auth="'User-Message'" size="sm" mode="text" color="link" icon="far fa-message" (click)="showMessage(item)"></d-button>
+          <d-button
+            *auth="'User-Message'" size="sm" mode="text" color="link" icon="far fa-message" dTooltip="پیام دادن"
+            (click)="showMessage(item)"></d-button>
           <ng-container *auth="'User'">
-            <d-button size="sm" mode="text" color="warning" icon="far fa-pen-to-square"
-                      (click)="showDialog(formTpl, {title: 'ویرایش کاربر ' + item.name, context: item})"></d-button>
-            <d-button size="sm" mode="text" color="danger" icon="far fa-trash-can" (click)="remove(item)"></d-button>
+            <d-button
+              size="sm" mode="text" color="warning" icon="far fa-pen-to-square" dTooltip="ویرایش"
+              (click)="showDialog(formTpl, {title: 'ویرایش کاربر ' + item.name, context: item})"></d-button>
+            <d-button
+              size="sm" mode="text" color="danger" icon="far fa-trash-can" dTooltip="حذف"
+              (click)="remove(item)"></d-button>
           </ng-container>
         </div>
       </td>

@@ -5,6 +5,7 @@ export interface UserOption {
   icon: string;
   color: Colors;
   text?: string;
+  tooltip?: string;
   component: Type<IUserOptionComponent>;
   dialog?: DialogOptions;
   accesses?: string[];
