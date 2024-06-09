@@ -2,7 +2,7 @@ import {Component, Injector} from '@angular/core';
 import {BasePanelComponent} from "@panel";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRepository} from "../../repositories";
-import {LoginStrategy} from "@identity";
+import {AuthMethod} from "../../contracts";
 
 @Component({
   selector: 'page-identity-change-password',
@@ -15,7 +15,7 @@ export class IndexComponent extends BasePanelComponent {
     value: new FormControl('', [Validators.required]),
     newPassword: new FormControl('', [Validators.required]),
     renewPassword: new FormControl('', [Validators.required]),
-    strategy: new FormControl(LoginStrategy.StaticPassword, [Validators.required]),
+    strategy: new FormControl(AuthMethod.StaticPassword, [Validators.required]),
   });
 
 
