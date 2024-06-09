@@ -44,7 +44,7 @@ export class BaseUsersComponent extends BaseDataComponent {
   }
 
   active(item: any) {
-    this.dialogService.prompt({message: 'پیام برای کاربر'}, {title: 'فعال کردن', position: 'top-center', maskClosable: true}).then(e => {
+    this.dialogService.prompt({title: 'فعال کردن'}, {position: 'top-center', maskClosable: true}).then(e => {
       if (!e.result) return;
       return this.userRepository.active({id: item.id, message: e.value}).subscribe(res => {
         this.load();
@@ -54,7 +54,7 @@ export class BaseUsersComponent extends BaseDataComponent {
   }
 
   deActive(item: any) {
-    this.dialogService.prompt({message: 'پیام برای کاربر'}, {title: 'غیرفعال کردن', position: 'top-center', maskClosable: true}).then(e => {
+    this.dialogService.prompt({title: 'غیرفعال کردن'}, {position: 'top-center', maskClosable: true}).then(e => {
       if (!e.result) return;
       return this.userRepository.deActive({id: item.id, message: e.value}).subscribe(res => {
         this.load();
@@ -68,7 +68,7 @@ export class BaseUsersComponent extends BaseDataComponent {
   }
 
   showMessage(item: any) {
-    this.dialogService.prompt({message: 'پیام برای کاربر', value: item.message}, {title: 'تنظیم پیام کاربر', position: 'top-center', maskClosable: true}).then(e => {
+    this.dialogService.prompt({title: 'تنظیم پیام کاربر', value: item.message}, {position: 'top-center', maskClosable: true}).then(e => {
       if (e.result) {
         this.userRepository.setMessage({id: item.id, message: e.value}).subscribe(res => {
           this.load();
