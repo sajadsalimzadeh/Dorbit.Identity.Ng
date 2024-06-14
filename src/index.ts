@@ -1,11 +1,12 @@
 import {ModuleWithProviders, NgModule} from '@angular/core';
-import {BaseLayoutService} from "../../panel/src/services/base-layout.service";
+import {BaseLayoutService} from "@panel";
 import {LayoutService} from "./services";
 import {Routes} from "@angular/router";
 import {DorbitModule} from "@framework";
 
 export * from './contracts';
 export * from './guards';
+export * from './interceptors';
 export * from './repositories';
 export * from './services';
 
