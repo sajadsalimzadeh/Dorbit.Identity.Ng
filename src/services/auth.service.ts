@@ -19,6 +19,10 @@ export class AuthService {
     })
   }
 
+  isLogin() {
+    return !!this.$user.value;
+  }
+
   hasAccess(access: string) {
     return this.$accesses.value.includes(access.toLowerCase());
   }
