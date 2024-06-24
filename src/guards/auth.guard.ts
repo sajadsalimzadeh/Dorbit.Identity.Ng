@@ -36,6 +36,9 @@ export class AuthGuard implements CanActivate {
         error: e => {
           this.panelService.$loading.next(false);
           this.messageService.danger(this.translateService.instant('message.authentication-failed'));
+          if(e.status == 401) {
+            this.router.navigate(['auth'])
+          }
           reject(e);
         }
       })
