@@ -2,7 +2,7 @@ import {Component, HostBinding, Injector} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {BaseComponent} from "@framework";
 import {AuthRepository} from "../../repositories";
-import {LoginRequest, LoginStrategy} from "../../contracts";
+import {LoginRequest, AuthMethod} from "../../contracts";
 import {AuthService} from "../../services";
 import {panelStore} from "../../../../panel/src/stores";
 
@@ -21,7 +21,7 @@ export class IndexComponent extends BaseComponent {
     username: new FormControl(''),
     value: new FormControl(''),
     captcha: new FormControl(''),
-    loginStrategy: new FormControl(LoginStrategy.StaticPassword),
+    loginStrategy: new FormControl(AuthMethod.StaticPassword),
   });
 
   constructor(

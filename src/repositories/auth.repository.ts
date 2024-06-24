@@ -1,8 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseApiRepository, CommandResult, QueryResult} from "@framework";
+import {BaseApiRepository, QueryResult} from "@framework";
 import {LoginRequest, LoginWithCodeRequest, UserDto, UserLoginResponse} from "../contracts";
-import {BehaviorSubject, tap} from "rxjs";
-import {PanelService} from "@panel";
+import {tap} from "rxjs";
 import {AuthService} from "../services";
 
 @Injectable({providedIn: 'root'})

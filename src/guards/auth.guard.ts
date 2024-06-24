@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {AuthRepository} from "../repositories/auth.repository";
-import {PanelService} from "../../../panel/src/services/panel.service";
+import {AuthRepository} from "../repositories";
+import {PanelService} from "@panel";
 import {CryptoUtil, DialogService, MessageService} from "@framework";
 import {IdentityMessageComponent} from "../components/message/index.component";
 import {TranslateService} from "@ngx-translate/core";
