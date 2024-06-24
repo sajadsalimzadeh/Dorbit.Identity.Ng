@@ -12,7 +12,6 @@ export class AuthInterceptor implements HttpInterceptor {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-
     const token = this.injector.get(BEARER_TOKEN)?.call(this);
     if(token) {
       req = req.clone({
@@ -24,6 +23,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     return next.handle(req).pipe(catchError(e => {
       if(e instanceof HttpErrorResponse) {
+
         if(e.status == 401) {
           this.router.navigate(['/auth'])
         }
