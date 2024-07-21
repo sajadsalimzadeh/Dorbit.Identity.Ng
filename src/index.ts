@@ -12,6 +12,7 @@ export * from './services';
 
 export * from './pages/auth/index.module';
 export * from './pages/users/options';
+export * from './pages';
 
 interface Configs {
 }

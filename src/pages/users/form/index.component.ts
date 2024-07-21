@@ -1,9 +1,8 @@
 import {Component, Injector} from '@angular/core';
-import {BaseFormComponent} from "@panel";
+import {BaseFormComponent} from "../../../../../panel/src/components";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRepository} from "../../../repositories/user.repository";
 import {IdentitySharedModule} from "../../../components";
-import {UserResetPasswordComponent} from "../reset-password/index.component";
 
 @Component({
   standalone: true,
