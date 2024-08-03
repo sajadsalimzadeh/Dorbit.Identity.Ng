@@ -23,7 +23,7 @@ export class UserRepository extends BaseWriteRepository {
     return this.http.get<PagedListResult>(`Search`, {params: req});
   }
 
-  override getAll(): Observable<PagedListResult> {
+  override getAll(): Observable<QueryResult<any[]>> {
     return super.getAll().pipe(tap(res => {
       res.data?.forEach(x => {
         x.text = `${x.name} (${x.username})`;
