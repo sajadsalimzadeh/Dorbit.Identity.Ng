@@ -22,6 +22,7 @@ export class AuthGuard implements CanActivate {
       this.panelService.$loading.next(true);
       this.authRepository.isLogin().subscribe({
         next: res => {
+          sessionStorage.removeItem('reload-counter')
           this.panelService.$loading.next(false);
           if (!res.success) {
             this.gotoLoginPage();
@@ -34,9 +35,25 @@ export class AuthGuard implements CanActivate {
           }
         },
         error: e => {
-          this.panelService.$loading.next(false);
           this.messageService.danger(this.translateService.instant('message.authentication-failed'));
           reject(e);
+
+          setTimeout(() => {
+            this.panelService.$loading.next(false);
+            const reloadCounterStr = sessionStorage.getItem('reload-counter');
+            const reloadCounter = (reloadCounterStr ? +reloadCounterStr + 1 : 1);
+            sessionStorage.setItem('reload-counter', reloadCounter.toString());
+            if (reloadCounter > 2) {
+              this.gotoLoginPage();
+            } else {
+              caches.keys().then(async cacheKeys => {
+                for (const cacheKey of cacheKeys) {
+                  await caches.delete(cacheKey);
+                }
+                (location as any).reload(true);
+              })
+            }
+          }, 1000)
         }
       })
     })
