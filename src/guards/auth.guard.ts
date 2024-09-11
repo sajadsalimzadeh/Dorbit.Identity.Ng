@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {AuthRepository} from "../repositories";
-import {PanelService} from "@panel";
-import {CryptoUtil, DialogService, MessageService} from "@framework";
-import {IdentityMessageComponent} from "../components/message/index.component";
-import {TranslateService} from "@ngx-translate/core";
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { AuthRepository } from "../repositories";
+import { PanelService } from "@panel";
+import { CryptoUtil, DialogService, MessageService } from "@framework";
+import { IdentityMessageComponent } from "../components/message/index.component";
+import { TranslateService } from "@ngx-translate/core";
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
     private panelService: PanelService,
@@ -22,7 +22,6 @@ export class AuthGuard implements CanActivate {
       this.panelService.$loading.next(true);
       this.authRepository.isLogin().subscribe({
         next: res => {
-          sessionStorage.removeItem('reload-counter')
           this.panelService.$loading.next(false);
           if (!res.success) {
             this.gotoLoginPage();
@@ -40,19 +39,12 @@ export class AuthGuard implements CanActivate {
 
           setTimeout(() => {
             this.panelService.$loading.next(false);
-            const reloadCounterStr = sessionStorage.getItem('reload-counter');
-            const reloadCounter = (reloadCounterStr ? +reloadCounterStr + 1 : 1);
-            sessionStorage.setItem('reload-counter', reloadCounter.toString());
-            if (reloadCounter > 2) {
-              this.gotoLoginPage();
-            } else {
-              caches.keys().then(async cacheKeys => {
-                for (const cacheKey of cacheKeys) {
-                  await caches.delete(cacheKey);
-                }
-                (location as any).reload(true);
-              })
-            }
+            caches.keys().then(async cacheKeys => {
+              for (const cacheKey of cacheKeys) {
+                await caches.delete(cacheKey);
+              }
+              (location as any).reload(true);
+            })
           }, 1000)
         }
       })
@@ -69,7 +61,7 @@ export class AuthGuard implements CanActivate {
           width: '100%',
           maxWidth: '500px',
           position: 'middle-center',
-          context: {user: user},
+          context: { user: user },
           component: IdentityMessageComponent
         });
       }, 1000)
