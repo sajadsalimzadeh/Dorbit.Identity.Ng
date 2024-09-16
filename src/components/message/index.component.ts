@@ -1,6 +1,5 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {base64encode, ButtonModule, CryptoUtil} from "@framework";
-import {UserRepository} from "@identity";
+import {Component, Input} from '@angular/core';
+import {ButtonModule, CryptoUtil} from "@framework";
 
 @Component({
   standalone: true,

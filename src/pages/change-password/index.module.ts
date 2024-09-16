@@ -11,5 +11,5 @@ import {IdentitySharedModule} from "../../components";
   ],
   declarations: [IndexComponent],
 })
-export class IndexModule {
+export class PageChangePasswordModule {
 }

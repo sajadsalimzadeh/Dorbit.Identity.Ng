@@ -12,5 +12,5 @@ import {IdentitySharedModule} from "../../components";
   ],
   declarations: [IndexComponent, FormComponent],
 })
-export class IndexModule {
+export class PageAccessesModule {
 }

@@ -19,5 +19,5 @@ import {UserResetPasswordComponent} from "./reset-password/index.component";
   declarations: [IndexComponent],
   providers: [],
 })
-export class UsersModule {
+export class PageUsersModule {
 }
