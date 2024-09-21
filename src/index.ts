@@ -1,5 +1,3 @@
-import {Routes} from "@angular/router";
-
 export * from './contracts';
 export * from './guards';
 export * from './interceptors';
