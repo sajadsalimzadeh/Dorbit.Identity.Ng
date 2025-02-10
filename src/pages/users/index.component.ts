@@ -43,6 +43,10 @@ export class BaseUsersComponent extends BaseDataComponent {
     }));
   }
 
+  override remove(item: any, title?: string, body?: string) {
+    super.remove(item, title, `آیا از حذف کاربر ${item.name} اطمینان دارید؟`);
+  }
+
   active(item: any) {
     this.dialogService.prompt({title: 'پیام برای کاربر'}, {title: 'فعال کردن', position: 'top-center', maskClosable: true}).then(e => {
       if (!e.result) return;
