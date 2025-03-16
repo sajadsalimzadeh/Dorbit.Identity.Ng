@@ -3,8 +3,6 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {BaseComponent} from "@framework";
 import {AuthRepository} from "../../repositories";
 import {LoginRequest, AuthMethod} from "../../contracts";
-import {AuthService} from "../../services";
-import {panelStore} from "../../../../panel/src/stores";
 
 @Component({
   selector: 'page-auth',
@@ -15,7 +13,7 @@ export class IndexComponent extends BaseComponent {
 
   @HostBinding('style.background-image') backgroundImage = 'url("assets/images/auth.jpg")';
 
-  theme = panelStore.store.theme;
+  theme: string = 'light';
 
   form = new FormGroup({
     username: new FormControl(''),
@@ -26,7 +24,6 @@ export class IndexComponent extends BaseComponent {
 
   constructor(
     injector: Injector,
-    private authService: AuthService,
     private authRepository: AuthRepository) {
     super(injector);
   }
@@ -34,7 +31,7 @@ export class IndexComponent extends BaseComponent {
   submit() {
     const fv = this.form.value as LoginRequest;
     this.authRepository.login(fv).subscribe(res => {
-      this.authService.$login.next(res.data);
+      this.authRepository.$login.next(res.data);
       this.router.navigate(['/'])
     })
   }

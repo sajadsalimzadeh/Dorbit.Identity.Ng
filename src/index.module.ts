@@ -1,14 +1,19 @@
 import {ModuleWithProviders, NgModule} from "@angular/core";
-import {DorbitModule} from "@framework";
-import {BaseLayoutService} from "@panel";
+import {BaseLayoutService, DorbitModule} from "@framework";
 import {LayoutService} from "./services";
+import {IdentitySharedModule} from "./components";
 
 interface Configs {
 }
 
 @NgModule({
-  imports: [DorbitModule],
-  exports: [DorbitModule],
+  imports: [
+    DorbitModule
+  ],
+  exports: [
+    DorbitModule,
+    IdentitySharedModule
+  ],
 })
 export class IdentityModule {
   static configs: Configs;

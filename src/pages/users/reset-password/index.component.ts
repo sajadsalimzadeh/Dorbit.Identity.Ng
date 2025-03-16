@@ -1,8 +1,8 @@
 import {Component, EventEmitter, Injector, Input, Output} from '@angular/core';
 import {UserRepository} from "../../../repositories";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {BasePanelComponent} from "@panel";
 import {IdentitySharedModule} from "../../../components";
+import {BaseComponent} from "@framework";
 
 @Component({
   standalone: true,
@@ -11,7 +11,7 @@ import {IdentitySharedModule} from "../../../components";
   templateUrl: 'index.component.html',
   styleUrls: ['./index.component.scss']
 })
-export class UserResetPasswordComponent extends BasePanelComponent {
+export class UserResetPasswordComponent extends BaseComponent {
 
   @Input({required: true}) model: any;
 
@@ -31,7 +31,7 @@ export class UserResetPasswordComponent extends BasePanelComponent {
 
   save() {
     this.userRepository.resetPassword({id: this.model.id, ...this.form.value}).subscribe(res => {
-      this.messages.success();
+      this.success(this.t('messages.success'));
       this.onComplete.emit();
     });
   }

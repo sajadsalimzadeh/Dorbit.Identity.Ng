@@ -1,8 +1,8 @@
 import {Component, Directive, Inject, Injector, Optional, TemplateRef, ViewChild} from '@angular/core';
 import {Observable, Subject, tap} from "rxjs";
 import {debounce, ODataQueryOptions, PagedListResult} from "@framework";
-import {UserRepository} from "../../repositories/user.repository";
-import {BaseDataComponent} from "@panel";
+import {UserRepository} from "../../repositories";
+import {BaseDataComponent} from "@framework";
 import {USER_OPTION, UserOption} from "./options";
 import {FormControl, FormGroup} from "@angular/forms";
 

@@ -1,5 +1,5 @@
 import {Component, Injector} from '@angular/core';
-import {BasePanelComponent} from "@panel";
+import {BasePanelComponent} from "@framework";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {UserRepository} from "../../repositories";
 import {AuthMethod} from "../../contracts";

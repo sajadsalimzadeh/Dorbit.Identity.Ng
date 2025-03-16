@@ -1,14 +1,32 @@
 import {Injectable, Injector} from '@angular/core';
 import {BaseApiRepository, QueryResult} from "@framework";
-import {LoginRequest, LoginWithCodeRequest, UserDto, UserLoginResponse} from "../contracts";
-import {tap} from "rxjs";
-import {AuthService} from "../services";
+import {AuthLoginResponse, AuthRegisterRequest, LoginRequest, LoginWithCodeRequest, UserDto, UserLoginResponse} from "../contracts";
+import {BehaviorSubject, tap} from "rxjs";
 
 @Injectable({providedIn: 'root'})
 export class AuthRepository extends BaseApiRepository {
 
-  constructor(injector: Injector, private authService: AuthService) {
+  $loading = new BehaviorSubject<boolean>(false);
+  $user = new BehaviorSubject<UserDto | undefined>(undefined);
+  $accesses = new BehaviorSubject<string[]>([]);
+  $login = new BehaviorSubject<UserLoginResponse | undefined>(undefined);
+
+  constructor(injector: Injector) {
     super(injector, 'Auth');
+  }
+
+  isLogin() {
+    this.$loading.next(true);
+    return this.http.get<QueryResult<UserDto>>('IsLogin').pipe(tap({
+      next: res => {
+        this.$loading.next(false);
+        this.$user.next(res.data);
+        this.$accesses.next(res.data?.accesses ?? []);
+      },
+      error: err => {
+        this.$loading.next(false);
+      }
+    }));
   }
 
   login(request: LoginRequest) {
@@ -19,13 +37,11 @@ export class AuthRepository extends BaseApiRepository {
     return this.http.post<QueryResult<UserLoginResponse>>('LoginWithCode', request);
   }
 
-  logout() {
-    return this.http.delete<QueryResult>('Logout');
+  register(req: AuthRegisterRequest) {
+    return this.http.post<QueryResult<AuthLoginResponse>>('Register', req)
   }
 
-  isLogin() {
-    return this.http.get<QueryResult<UserDto>>('IsLogin').pipe(tap(res => {
-      this.authService.$user.next(res.data);
-    }));
+  logout() {
+    return this.http.delete<QueryResult>('Logout');
   }
 }

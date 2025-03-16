@@ -1,6 +1,6 @@
 import {Component, Injector} from '@angular/core';
 import {Observable} from "rxjs";
-import {BaseDataComponent} from "@panel";
+import {BaseDataComponent} from "@framework";
 import {ODataQueryOptions, PagedListResult} from "@framework";
 import {AccessRepository} from "../../repositories";
 

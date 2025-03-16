@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AuthRepository } from "../repositories";
-import { PanelService } from "@panel";
 import { CryptoUtil, DialogService, MessageService } from "@framework";
 import { IdentityMessageComponent } from "../components/message/index.component";
 import { TranslateService } from "@ngx-translate/core";
@@ -9,7 +8,6 @@ import { TranslateService } from "@ngx-translate/core";
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
-    private panelService: PanelService,
     private dialogService: DialogService,
     private authRepository: AuthRepository,
     private messageService: MessageService,
@@ -19,14 +17,11 @@ export class AuthGuard implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     return new Promise<boolean>((resolve, reject) => {
-      this.panelService.$loading.next(true);
       this.authRepository.isLogin().subscribe({
         next: res => {
-          this.panelService.$loading.next(false);
           if (!res.success) {
             this.gotoLoginPage();
           }
-          this.panelService.$userInfo.next(res.data);
 
           resolve(res.success);
           if (res.success && res.data) {
@@ -38,7 +33,6 @@ export class AuthGuard implements CanActivate {
           reject(e);
 
           setTimeout(() => {
-            this.panelService.$loading.next(false);
             caches.keys().then(async cacheKeys => {
               for (const cacheKey of cacheKeys) {
                 await caches.delete(cacheKey);

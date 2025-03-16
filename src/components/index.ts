@@ -1,13 +1,15 @@
 import {NgModule} from '@angular/core';
 import {DorbitModule} from "@framework";
-import {PanelSharedModule} from "@panel";
+import {AuthDirective} from "./auth.directive";
+
+export * from './auth.directive';
 
 export const COMPONENTS = [
+  AuthDirective
 ]
 
 export const MODULES = [
   DorbitModule,
-  PanelSharedModule,
 ]
 
 @NgModule({

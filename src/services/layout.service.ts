@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BaseLayoutService, MenuItem} from "../../../panel/src/services/base-layout.service";
+import {BaseLayoutService, MenuItem} from "@framework";
 
 @Injectable()
 export class LayoutService extends BaseLayoutService {

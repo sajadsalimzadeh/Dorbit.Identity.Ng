@@ -1,6 +1,6 @@
 import {Component, Injector} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {BaseFormComponent} from "@panel";
+import {BaseFormComponent} from "@framework";
 import {AccessRepository} from "../../../repositories";
 
 @Component({

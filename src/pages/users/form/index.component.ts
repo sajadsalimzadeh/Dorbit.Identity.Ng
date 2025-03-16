@@ -1,7 +1,7 @@
 import {Component, Injector} from '@angular/core';
-import {BaseFormComponent} from "../../../../../panel/src/components";
+import {BaseFormComponent} from "@framework";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {UserRepository} from "../../../repositories/user.repository";
+import {UserRepository} from "../../../repositories";
 import {IdentitySharedModule} from "../../../components";
 
 @Component({
