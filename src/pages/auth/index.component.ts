@@ -2,12 +2,13 @@ import {Component, HostBinding, Injector} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {BaseComponent} from "@framework";
 import {AuthRepository} from "../../repositories";
-import {LoginRequest, AuthMethod} from "../../contracts";
+import {AuthLoginWithStaticPasswordRequest} from "@identity";
 
 @Component({
-  selector: 'page-auth',
-  templateUrl: './index.component.html',
-  styleUrls: ['./index.component.scss']
+    selector: 'page-auth',
+    templateUrl: './index.component.html',
+    styleUrls: ['./index.component.scss'],
+    standalone: false
 })
 export class IndexComponent extends BaseComponent {
 
@@ -17,9 +18,8 @@ export class IndexComponent extends BaseComponent {
 
   form = new FormGroup({
     username: new FormControl(''),
-    value: new FormControl(''),
+    password: new FormControl(''),
     captcha: new FormControl(''),
-    loginStrategy: new FormControl(AuthMethod.StaticPassword),
   });
 
   constructor(
@@ -29,10 +29,11 @@ export class IndexComponent extends BaseComponent {
   }
 
   submit() {
-    const fv = this.form.value as LoginRequest;
-    this.authRepository.login(fv).subscribe(res => {
-      this.authRepository.$login.next(res.data);
-      this.router.navigate(['/'])
+    this.authRepository.loginWithStaticPassword(this.form.value as AuthLoginWithStaticPasswordRequest).subscribe(res => {
+      if(res.data) {
+        localStorage.setItem('token', res.data.accessToken);
+        this.router.navigate(['/']);
+      }
     })
   }
 }

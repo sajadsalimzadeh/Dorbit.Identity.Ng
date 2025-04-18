@@ -3,7 +3,8 @@ import {Subscription} from "rxjs";
 import {AuthRepository} from "@identity";
 
 @Directive({
-  selector: '[auth]',
+    selector: '[auth]',
+    standalone: false
 })
 export class AuthDirective implements OnInit, OnDestroy {
   private hasView = false;

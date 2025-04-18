@@ -7,15 +7,9 @@
       <d-control-group size="lg" [formControl]="form.controls.username" label="نام کاربری">
         <d-input dir="ltr"></d-input>
       </d-control-group>
-      <d-control-group size="lg" [formControl]="form.controls.value" label="رمز عبور">
+      <d-control-group size="lg" [formControl]="form.controls.password" label="رمز عبور">
         <d-input type="password" dir="ltr"></d-input>
       </d-control-group>
-      <!--      <div class="captcha-box">-->
-      <!--        <d-control-group size="lg" [formControl]="form.controls.captcha" label="کد امنیتی">-->
-      <!--          <d-input></d-input>-->
-      <!--        </d-control-group>-->
-      <!--        <div class="captcha-image"></div>-->
-      <!--      </div>-->
       <div class="mt-5">
         <d-button size="lg" type="submit" class="w-100" [loading]="loadingService.loading">
           ورود

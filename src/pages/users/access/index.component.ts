@@ -5,11 +5,10 @@ import {IdentitySharedModule} from "../../../components";
 import {UserResetPasswordComponent} from "../reset-password/index.component";
 
 @Component({
-  standalone: true,
-  imports: [IdentitySharedModule],
-  selector: 'app-user-access',
-  templateUrl: 'index.component.html',
-  styleUrls: ['./index.component.scss']
+    imports: [IdentitySharedModule],
+    selector: 'app-user-access',
+    templateUrl: 'index.component.html',
+    styleUrls: ['./index.component.scss']
 })
 export class UserAccessComponent extends BaseComponent {
 

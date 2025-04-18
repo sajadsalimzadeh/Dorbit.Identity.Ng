@@ -1,9 +1,17 @@
-import {TokenResponse} from "./tokens";
-
-export interface AuthLoginRequest {
+export interface AuthLoginWithStaticPasswordRequest {
   username: string;
-  value: string;
-  loginStrategy: AuthMethod;
+  password: string;
+}
+
+export enum OtpType {
+  PhoneNumber = 1,
+  Email = 2
+}
+
+export interface AuthLoginWithOtpRequest {
+  type: OtpType;
+  receiver: string;
+  code: string;
 }
 
 export interface AuthRegisterRequest {
@@ -11,44 +19,15 @@ export interface AuthRegisterRequest {
   username: string;
   email: string;
   password: string;
-  loginStrategy: AuthMethod;
-}
-
-export enum AuthMethod {
-  None = 0,
-  StaticPassword = 1,
-  Cellphone = 2,
-  Email = 3,
-  Authenticator = 4
+  otpCode: string;
 }
 
 export interface AuthLoginResponse {
-  otpId?: string;
-  loginStrategy: AuthMethod;
-  token: AuthTokenResponse;
-}
-
-export interface AuthTokenResponse {
-  key: string;
-  csrf: string;
-}
-
-
-export interface LoginRequest {
-  username: string;
-  value: string;
-  loginStrategy: AuthMethod;
+  accessToken: string;
+  isNeedTwoFactorAuthentication: boolean;
 }
 
 export interface LoginWithCodeRequest {
-  otpId: string;
-  loginStrategy: AuthMethod;
+  receiver: string;
   code: string;
-}
-
-export interface UserLoginResponse {
-  otpId: string;
-  loginStrategy: AuthMethod;
-
-  token: TokenResponse;
 }

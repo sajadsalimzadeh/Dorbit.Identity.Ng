@@ -1,11 +1,11 @@
 import {Component, Input} from '@angular/core';
-import {ButtonModule, CryptoUtil} from "@framework";
+import {ButtonComponent, CryptoUtil} from "@framework";
 
 @Component({
   standalone: true,
   selector: 'app-identity-message',
   imports: [
-    ButtonModule
+    ButtonComponent
   ],
   templateUrl: 'index.component.html'
 })

@@ -5,11 +5,10 @@ import {UserRepository} from "../../../repositories";
 import {IdentitySharedModule} from "../../../components";
 
 @Component({
-  standalone: true,
-  imports: [IdentitySharedModule],
-  selector: 'app-user-form',
-  templateUrl: 'index.component.html',
-  styleUrls: ['./index.component.scss']
+    imports: [IdentitySharedModule],
+    selector: 'app-user-form',
+    templateUrl: 'index.component.html',
+    styleUrls: ['./index.component.scss']
 })
 export class UserFormComponent extends BaseFormComponent {
 

@@ -1,7 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseApiRepository, PagedListResult, QueryResult} from "@framework";
-import {Observable} from "rxjs";
-import {AuthMethod} from "../contracts";
+import {BaseApiRepository, QueryResult} from "@framework";
+import {OtpType} from "../contracts";
 
 
 @Injectable({providedIn: 'root'})
@@ -11,7 +10,7 @@ export class OtpRepository extends BaseApiRepository {
     super(injector, 'Otps');
   }
 
-  send(req: {value: string, method: AuthMethod}) {
+  send(req: {receiver: string, type: OtpType}) {
     return this.http.post<QueryResult<string>>(``, req);
   }
 
