@@ -4,7 +4,7 @@ export interface AuthLoginWithStaticPasswordRequest {
 }
 
 export enum OtpType {
-  PhoneNumber = 1,
+  Cellphone = 1,
   Email = 2
 }
 
