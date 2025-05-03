@@ -1,8 +1,0 @@
-<ng-container *ngIf="loadingService.loading">
-  <d-shimmer *ngFor="let item of [0,0,0,0,0,0]" ratio="100%:2" class="my-1"></d-shimmer>
-</ng-container>
-<d-tree dir="ltr" [items]="data.items">
-  <ng-template dTemplate let-item>
-    {{ item.name }}
-  </ng-template>
-</d-tree>

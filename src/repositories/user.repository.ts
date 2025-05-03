@@ -1,6 +1,8 @@
-import {Injectable, Injector} from '@angular/core';
+import {Inject, Injectable, Injector} from '@angular/core';
 import {BaseWriteRepository, CommandResult, ODataQueryOptions, PagedListResult, QueryResult} from "@framework";
-import {Observable, tap} from "rxjs";
+import {BehaviorSubject, Observable, tap} from "rxjs";
+import {IdentityUserDto, UserEditRequest} from "../contracts/_public";
+import {BASE_IDENTITY_URL} from "../identity";
 
 export interface PrivilegeSaveRequest {
   startTime?: string;
@@ -9,17 +11,18 @@ export interface PrivilegeSaveRequest {
 }
 
 @Injectable({providedIn: 'root'})
-export class UserRepository extends BaseWriteRepository {
+export class IdentityUserRepository extends BaseWriteRepository {
+  $own = new BehaviorSubject<IdentityUserDto | undefined>(undefined)
 
   constructor(injector: Injector) {
-    super(injector, 'Users');
+    super(injector, injector.get(BASE_IDENTITY_URL), 'Users');
   }
 
   override select(query?: ODataQueryOptions): Observable<PagedListResult> {
     return super.select(query);
   }
 
-  search(req: {search: any, code: any}): Observable<PagedListResult> {
+  search(req: { search: any, code: any }): Observable<PagedListResult> {
     return this.http.get<PagedListResult>(`Search`, {params: req});
   }
 
@@ -32,7 +35,11 @@ export class UserRepository extends BaseWriteRepository {
   }
 
   getOwn() {
-    return this.http.get<QueryResult>('Own');
+    return this.http.get<QueryResult>('Own').pipe(tap({
+      next: res => {
+        this.$own.next(res.data);
+      }
+    }));
   }
 
   ownChangePassword(req: any) {
@@ -43,12 +50,16 @@ export class UserRepository extends BaseWriteRepository {
     return this.http.post<CommandResult>(`${req.id}/ResetPassword`, req);
   }
 
-  editOwn(req: any) {
-    return this.http.patch<QueryResult>('Own', req);
+  editOwn(req: UserEditRequest) {
+    return this.http.patch<QueryResult<IdentityUserDto>>('Own', req);
   }
 
-  getPrivileges(id: string) {
-    return this.http.get<QueryResult<string[]>>(`${id}/Privileges`);
+  getAllPrivilege(id: string) {
+    return this.http.get<QueryResult<any[]>>(`${id}/Privileges`)
+  }
+
+  getAllToken(id: string) {
+    return this.http.get<QueryResult<any[]>>(`${id}/Tokens`)
   }
 
   savePrivileges(id: string, request: PrivilegeSaveRequest) {

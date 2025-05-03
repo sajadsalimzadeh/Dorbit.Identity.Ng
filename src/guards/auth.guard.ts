@@ -1,14 +1,12 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthRepository } from "../repositories";
-import { CryptoUtil, DialogService, MessageService } from "@framework";
-import { IdentityMessageComponent } from "../components/message/index.component";
+import { AuthRepository } from "../repositories/_public";
 import { TranslateService } from "@ngx-translate/core";
+import {MessageService} from "primeng/api";
 
 @Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
   constructor(
-    private dialogService: DialogService,
     private authRepository: AuthRepository,
     private messageService: MessageService,
     private translateService: TranslateService,
@@ -24,12 +22,12 @@ export class AuthGuard implements CanActivate {
           }
 
           resolve(res.success);
-          if (res.success && res.data) {
-            this.handleMessage(res.data)
-          }
         },
         error: e => {
-          this.messageService.danger(this.translateService.instant('message.authentication-failed'));
+          this.messageService.add({
+            severity: 'error',
+            detail: this.translateService.instant('message.authentication-failed')
+          });
           reject(e);
 
           setTimeout(() => {
@@ -43,23 +41,6 @@ export class AuthGuard implements CanActivate {
         }
       })
     })
-  }
-
-  private handleMessage(user: any) {
-
-    const messageHash = localStorage.getItem('user-message');
-    if (user.message && CryptoUtil.hashCode(user.message).toString() != messageHash) {
-      setTimeout(() => {
-        this.dialogService.open({
-          title: 'پیام از طرف مدیر',
-          width: '100%',
-          maxWidth: '500px',
-          position: 'middle-center',
-          context: { user: user },
-          component: IdentityMessageComponent
-        });
-      }, 1000)
-    }
   }
 
   private async gotoLoginPage() {
