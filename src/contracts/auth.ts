@@ -1,4 +1,4 @@
-export interface AuthLoginWithStaticPasswordRequest {
+export interface AuthLoginWithPasswordRequest {
   username: string;
   password: string;
 }

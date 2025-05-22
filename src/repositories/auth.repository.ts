@@ -1,6 +1,6 @@
 import {Inject, Injectable, Injector} from '@angular/core';
-import {BaseApiRepository, QueryResult} from "@framework";
-import {AuthLoginResponse, AuthLoginWithStaticPasswordRequest, AuthRegisterRequest, LoginWithCodeRequest, IdentityUserDto} from "../contracts/_public";
+import {BaseApiRepository, CaptchaValidateRequest, QueryResult} from "@framework";
+import {AuthLoginResponse, AuthLoginWithPasswordRequest, AuthRegisterRequest, LoginWithCodeRequest, IdentityUserDto} from "../contracts/_public";
 import {BehaviorSubject, tap} from "rxjs";
 import {BASE_IDENTITY_URL} from "../identity";
 
@@ -29,8 +29,12 @@ export class AuthRepository extends BaseApiRepository {
     }));
   }
 
-  loginWithStaticPassword(request: AuthLoginWithStaticPasswordRequest) {
-    return this.http.post<QueryResult<AuthLoginResponse>>('Login', request);
+  loginWithPassword(request: AuthLoginWithPasswordRequest, captchaReq: CaptchaValidateRequest) {
+    return this.http.post<QueryResult<AuthLoginResponse>>('Login', request, {
+      headers: {
+        'Captcha': `${captchaReq.key} ${captchaReq.value}`
+      }
+    });
   }
 
   loginWithOtp(request: LoginWithCodeRequest) {
