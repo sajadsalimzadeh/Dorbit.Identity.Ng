@@ -1,4 +1,4 @@
 export interface TokenResponse {
-  csrf: string;
-  key: string;
+    csrf: string;
+    key: string;
 }

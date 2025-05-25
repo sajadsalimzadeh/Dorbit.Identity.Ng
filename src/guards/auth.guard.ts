@@ -1,49 +1,49 @@
-import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
-import { AuthRepository } from "../repositories/_public";
-import { TranslateService } from "@ngx-translate/core";
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {AuthRepository} from "../repositories/_public";
+import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
 
-@Injectable({ providedIn: 'root' })
+@Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authRepository: AuthRepository,
-    private messageService: MessageService,
-    private translateService: TranslateService,
-    private router: Router) {
-  }
+    constructor(
+        private authRepository: AuthRepository,
+        private messageService: MessageService,
+        private translateService: TranslateService,
+        private router: Router) {
+    }
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    return new Promise<boolean>((resolve, reject) => {
-      this.authRepository.isLogin().subscribe({
-        next: res => {
-          if (!res.success) {
-            this.gotoLoginPage();
-          }
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
+        return new Promise<boolean>((resolve, reject) => {
+            this.authRepository.isLogin().subscribe({
+                next: res => {
+                    if (!res.success) {
+                        this.gotoLoginPage();
+                    }
 
-          resolve(res.success);
-        },
-        error: e => {
-          this.messageService.add({
-            severity: 'error',
-            detail: this.translateService.instant('message.authentication-failed')
-          });
-          reject(e);
+                    resolve(res.success);
+                },
+                error: e => {
+                    this.messageService.add({
+                        severity: 'error',
+                        detail: this.translateService.instant('message.authentication-failed')
+                    });
+                    reject(e);
 
-          setTimeout(() => {
-            caches.keys().then(async cacheKeys => {
-              for (const cacheKey of cacheKeys) {
-                await caches.delete(cacheKey);
-              }
-              (location as any).reload(true);
+                    setTimeout(() => {
+                        caches.keys().then(async cacheKeys => {
+                            for (const cacheKey of cacheKeys) {
+                                await caches.delete(cacheKey);
+                            }
+                            (location as any).reload(true);
+                        })
+                    }, 1000)
+                }
             })
-          }, 1000)
-        }
-      })
-    })
-  }
+        })
+    }
 
-  private async gotoLoginPage() {
-    await this.router.navigate(['/auth']);
-  }
+    private async gotoLoginPage() {
+        await this.router.navigate(['/auth']);
+    }
 }

@@ -1,7 +1,7 @@
 import {Store} from '@framework';
 
 export interface IdentityStore {
-  token: string;
+    token: string;
 }
 
 export const identityStore = new Store<IdentityStore>('')
