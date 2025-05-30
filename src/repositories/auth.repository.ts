@@ -21,9 +21,9 @@ export class AuthRepository extends BaseApiRepository {
         super(injector, injector.get(BASE_IDENTITY_URL), 'Auth');
     }
 
-    isLogin() {
+    getLoginInfo() {
         this.$loading.next(true);
-        return this.http.get<QueryResult<IdentityUserDto>>('IsLogin').pipe(tap({
+        return this.http.get<QueryResult<IdentityUserDto>>('').pipe(tap({
             next: res => {
                 this.$loading.next(false);
                 this.$user.next(res.data);
@@ -36,7 +36,7 @@ export class AuthRepository extends BaseApiRepository {
     }
 
     loginWithPassword(request: AuthLoginWithPasswordRequest, captchaReq: CaptchaValidateRequest) {
-        return this.http.post<QueryResult<AuthLoginResponse>>('Login', request, {
+        return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithPassword', request, {
             headers: {
                 'Captcha': `${captchaReq.key} ${captchaReq.value}`
             }
@@ -44,7 +44,7 @@ export class AuthRepository extends BaseApiRepository {
     }
 
     loginWithOtp(request: LoginWithCodeRequest) {
-        return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithCode', request);
+        return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithOtp', request);
     }
 
     register(req: AuthRegisterRequest) {

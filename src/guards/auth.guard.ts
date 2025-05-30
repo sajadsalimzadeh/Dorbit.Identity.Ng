@@ -16,7 +16,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return new Promise<boolean>((resolve, reject) => {
-            this.authRepository.isLogin().subscribe({
+            this.authRepository.getLoginInfo().subscribe({
                 next: res => {
                     if (!res.success) {
                         this.gotoLoginPage();
