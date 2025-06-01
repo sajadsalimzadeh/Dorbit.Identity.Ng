@@ -3,6 +3,7 @@ import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '
 import {AuthRepository} from "../repositories/_public";
 import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
@@ -30,14 +31,16 @@ export class AuthGuard implements CanActivate {
                     });
                     reject(e);
 
-                    setTimeout(() => {
-                        caches.keys().then(async cacheKeys => {
-                            for (const cacheKey of cacheKeys) {
-                                await caches.delete(cacheKey);
-                            }
-                            // (location as any).reload(true);
-                        })
-                    }, 1000)
+                    if(e instanceof HttpErrorResponse && e.status != 401) {
+                        setTimeout(() => {
+                            caches.keys().then(async cacheKeys => {
+                                for (const cacheKey of cacheKeys) {
+                                    await caches.delete(cacheKey);
+                                }
+                                (location as any).reload(true);
+                            })
+                        }, 1000)
+                    }
                 }
             })
         })

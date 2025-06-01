@@ -34,7 +34,7 @@ export class AuthRepository extends BaseApiRepository {
     }
 
     loginWithPassword(request: AuthLoginWithPasswordRequest, captchaReq: CaptchaValidateRequest) {
-        return this.http.post<QueryResult<AuthLoginResponse>>('Login', request, {
+        return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithPassword', request, {
             headers: {
                 'Captcha': `${captchaReq.key} ${captchaReq.value}`
             }
@@ -42,7 +42,7 @@ export class AuthRepository extends BaseApiRepository {
     }
 
     loginWithOtp(request: LoginWithCodeRequest) {
-        return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithCode', request);
+        return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithOtp', request);
     }
 
     register(req: AuthRegisterRequest) {
