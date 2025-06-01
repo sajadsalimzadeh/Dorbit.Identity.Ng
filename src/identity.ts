@@ -20,4 +20,4 @@ const COMPONENTS = [
 export class IdentityModule {
 }
 
-export const BASE_IDENTITY_URL = new InjectionToken<string>('BASE_IDENTITY_URL');
+export const BASE_URL_IDENTITY = new InjectionToken<string>('BASE_IDENTITY_URL');

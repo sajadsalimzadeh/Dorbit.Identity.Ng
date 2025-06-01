@@ -9,7 +9,6 @@ import {AuthRepository} from "@identity";
 export class AuthDirective implements OnInit, OnDestroy {
     private hasView = false;
     private subscription = new Subscription();
-    private accesses: string[] = [];
     private needleAccesses?: string[];
 
     constructor(
@@ -20,13 +19,14 @@ export class AuthDirective implements OnInit, OnDestroy {
     }
 
     @Input() set auth(value: string | string[] | undefined) {
-        this.needleAccesses = (typeof value === 'string' ? [value?.toLowerCase()] : value?.map(x => x?.toLowerCase()));
+        if(typeof value === 'undefined') this.needleAccesses = [];
+        else if(typeof value === 'string') this.needleAccesses = [value];
+        else this.needleAccesses = value;
         this.render();
     }
 
     ngOnInit(): void {
-        this.subscription.add(this.authRepository.$accesses.subscribe(e => {
-            this.accesses = e;
+        this.subscription.add(this.authRepository.$identity.subscribe(e => {
             this.render();
         }))
     }
@@ -36,10 +36,13 @@ export class AuthDirective implements OnInit, OnDestroy {
     }
 
     render() {
-        console.log(this.accesses)
         let granted: boolean;
-        if (this.needleAccesses && this.needleAccesses.length > 0) {
-            granted = !!this.needleAccesses.find(x => this.accesses.includes(x))
+        const identity = this.authRepository.$identity.value;
+        if(identity?.isAdmin) {
+            granted = true;
+        }
+        else if (this.needleAccesses && this.needleAccesses.length > 0) {
+            granted = !!this.needleAccesses.find(x => identity?.accessibility.includes(x))
         } else {
             granted = true;
         }

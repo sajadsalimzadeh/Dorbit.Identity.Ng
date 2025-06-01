@@ -15,7 +15,7 @@ export class AuthGuard implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         return new Promise<boolean>((resolve, reject) => {
-            this.authRepository.isLogin().subscribe({
+            this.authRepository.getLoginInfo().subscribe({
                 next: res => {
                     if (!res.success) {
                         this.gotoLoginPage();
@@ -35,7 +35,7 @@ export class AuthGuard implements CanActivate {
                             for (const cacheKey of cacheKeys) {
                                 await caches.delete(cacheKey);
                             }
-                            (location as any).reload(true);
+                            // (location as any).reload(true);
                         })
                     }, 1000)
                 }

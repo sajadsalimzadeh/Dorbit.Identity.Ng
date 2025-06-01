@@ -31,3 +31,9 @@ export interface LoginWithCodeRequest {
     receiver: string;
     code: string;
 }
+
+export interface IdentityDto {
+    user: any;
+    isAdmin:boolean;
+    accessibility: string[];
+}

@@ -4,30 +4,28 @@ import {
     AuthLoginResponse,
     AuthLoginWithPasswordRequest,
     AuthRegisterRequest,
-    IdentityUserDto,
+    IdentityDto,
     LoginWithCodeRequest
 } from "../contracts/_public";
 import {BehaviorSubject, tap} from "rxjs";
-import {BASE_IDENTITY_URL} from "../identity";
+import {BASE_URL_IDENTITY} from "../identity";
 
 @Injectable({providedIn: 'root'})
 export class AuthRepository extends BaseApiRepository {
 
     $loading = new BehaviorSubject<boolean>(false);
-    $accesses = new BehaviorSubject<string[]>([]);
-    $user = new BehaviorSubject<IdentityUserDto | undefined>(undefined);
+    $identity = new BehaviorSubject<IdentityDto | undefined>(undefined);
 
     constructor(injector: Injector) {
-        super(injector, injector.get(BASE_IDENTITY_URL), 'Auth');
+        super(injector, injector.get(BASE_URL_IDENTITY), 'Auth');
     }
 
-    isLogin() {
+    getLoginInfo() {
         this.$loading.next(true);
-        return this.http.get<QueryResult<IdentityUserDto>>('IsLogin').pipe(tap({
+        return this.http.get<QueryResult<IdentityDto>>('').pipe(tap({
             next: res => {
                 this.$loading.next(false);
-                this.$user.next(res.data);
-                this.$accesses.next(res.data?.accesses ?? []);
+                this.$identity.next(res.data);
             },
             error: err => {
                 this.$loading.next(false);

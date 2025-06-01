@@ -1,8 +1,8 @@
 import {Injectable, Injector} from '@angular/core';
 import {BaseCrudRepository, CommandResult, ODataQueryOptions, PagedListResult, QueryResult} from "@framework";
 import {BehaviorSubject, Observable, tap} from "rxjs";
-import {IdentityUserDto, UserEditRequest} from "../contracts/_public";
-import {BASE_IDENTITY_URL} from "../identity";
+import {IdentityDto, UserEditRequest} from "../contracts/_public";
+import {BASE_URL_IDENTITY} from "../identity";
 
 export interface PrivilegeSaveRequest {
     startTime?: string;
@@ -12,10 +12,10 @@ export interface PrivilegeSaveRequest {
 
 @Injectable({providedIn: 'root'})
 export class IdentityUserRepository extends BaseCrudRepository {
-    $own = new BehaviorSubject<IdentityUserDto | undefined>(undefined)
+    $own = new BehaviorSubject<IdentityDto | undefined>(undefined)
 
     constructor(injector: Injector) {
-        super(injector, injector.get(BASE_IDENTITY_URL), 'Users');
+        super(injector, injector.get(BASE_URL_IDENTITY), 'Users');
     }
 
     override select(query?: ODataQueryOptions): Observable<PagedListResult> {
@@ -51,7 +51,7 @@ export class IdentityUserRepository extends BaseCrudRepository {
     }
 
     editOwn(req: UserEditRequest) {
-        return this.http.patch<QueryResult<IdentityUserDto>>('Own', req);
+        return this.http.patch<QueryResult<IdentityDto>>('Own', req);
     }
 
     getAllPrivilege(id: string) {
