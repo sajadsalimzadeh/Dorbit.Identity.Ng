@@ -1,4 +1,4 @@
-import {Store} from '@framework';
+import {Store} from '@framework/stores/store';
 
 export interface IdentityStore {
     token: string;

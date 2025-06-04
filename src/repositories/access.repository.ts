@@ -1,6 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseApiRepository, QueryResult} from "@framework";
 import {BASE_URL_IDENTITY} from "../identity";
+import {BaseApiRepository} from '@framework/repositories/base-api.repository';
+import {QueryResult} from '@framework/contracts/results';
 
 @Injectable({providedIn: 'root'})
 export class AccessRepository extends BaseApiRepository {

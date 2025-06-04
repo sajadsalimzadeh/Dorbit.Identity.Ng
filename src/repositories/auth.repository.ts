@@ -1,5 +1,4 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseApiRepository, CaptchaValidateRequest, QueryResult} from "@framework";
 import {
     AuthLoginResponse,
     AuthLoginWithPasswordRequest,
@@ -9,6 +8,9 @@ import {
 } from "../contracts/_public";
 import {BehaviorSubject, tap} from "rxjs";
 import {BASE_URL_IDENTITY} from "../identity";
+import {BaseApiRepository} from '@framework/repositories/base-api.repository';
+import {QueryResult} from '@framework/contracts/results';
+import {CaptchaValidateRequest} from '@framework/contracts/captcha';
 
 @Injectable({providedIn: 'root'})
 export class AuthRepository extends BaseApiRepository {

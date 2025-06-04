@@ -1,7 +1,7 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseApiRepository} from "@framework";
 import {Token} from "@angular/compiler";
 import {BASE_URL_IDENTITY} from "../identity";
+import {BaseApiRepository} from '@framework/repositories/base-api.repository';
 
 @Injectable({providedIn: 'root'})
 export class TokenRepository extends BaseApiRepository {

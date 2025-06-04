@@ -1,8 +1,10 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseCrudRepository, CommandResult, ODataQueryOptions, PagedListResult, QueryResult} from "@framework";
 import {BehaviorSubject, Observable, tap} from "rxjs";
 import {IdentityDto, UserEditRequest} from "../contracts/_public";
 import {BASE_URL_IDENTITY} from "../identity";
+import {BaseCrudRepository} from '@framework/repositories/base-crud.repository';
+import {CommandResult, PagedListResult, QueryResult} from '@framework/contracts/results';
+import {ODataQueryOptions} from '@framework/contracts/odata-query-options';
 
 export interface PrivilegeSaveRequest {
     startTime?: string;
@@ -11,7 +13,7 @@ export interface PrivilegeSaveRequest {
 }
 
 @Injectable({providedIn: 'root'})
-export class IdentityUserRepository extends BaseCrudRepository {
+export class UserRepository extends BaseCrudRepository {
     $own = new BehaviorSubject<IdentityDto | undefined>(undefined)
 
     constructor(injector: Injector) {

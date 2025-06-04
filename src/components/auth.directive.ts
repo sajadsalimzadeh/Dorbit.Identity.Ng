@@ -1,10 +1,10 @@
 import {Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from "@angular/core";
 import {Subscription} from "rxjs";
-import {AuthRepository} from "@identity";
+import {AuthRepository} from '@identity/repositories/auth.repository';
 
 @Directive({
     selector: '[auth]',
-    standalone: false
+    standalone: true
 })
 export class AuthDirective implements OnInit, OnDestroy {
     private hasView = false;

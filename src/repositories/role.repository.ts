@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
-import {BaseCrudRepository} from "@framework";
 import {BASE_URL_IDENTITY} from "../identity";
+import {BaseCrudRepository} from '@framework/repositories/base-crud.repository';
 
 @Injectable({providedIn: 'root'})
 export class RoleRepository extends BaseCrudRepository {
