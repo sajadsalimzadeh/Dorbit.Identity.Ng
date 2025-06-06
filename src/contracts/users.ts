@@ -3,3 +3,9 @@ export interface UserEditRequest {
     cellphone?: string;
     email?: string;
 }
+
+export enum UserStatus
+{
+    InActive = 0,
+    Active = 1,
+}
