@@ -1,37 +1,33 @@
 import {Injectable, Injector} from '@angular/core';
+import {tap} from "rxjs";
+import {BASE_URL_IDENTITY} from "../identity";
+import {BaseApiRepository} from '@framework/repositories/base-api.repository';
+import {QueryResult} from '@framework/contracts/results';
+import {CaptchaValidateRequest} from '@framework/contracts/captcha';
 import {
     AuthLoginResponse,
     AuthLoginWithPasswordRequest,
     AuthRegisterRequest,
     IdentityDto,
     LoginWithCodeRequest
-} from "../contracts/_public";
-import {BehaviorSubject, tap} from "rxjs";
-import {BASE_URL_IDENTITY} from "../identity";
-import {BaseApiRepository} from '@framework/repositories/base-api.repository';
-import {QueryResult} from '@framework/contracts/results';
-import {CaptchaValidateRequest} from '@framework/contracts/captcha';
+} from '../contracts/auth';
 
 @Injectable({providedIn: 'root'})
 export class AuthRepository extends BaseApiRepository {
 
-    $loading = new BehaviorSubject<boolean>(false);
-    $identity = new BehaviorSubject<IdentityDto | undefined>(undefined);
+    identity!: IdentityDto;
 
     constructor(injector: Injector) {
         super(injector, injector.get(BASE_URL_IDENTITY), 'Auth');
     }
 
     getLoginInfo() {
-        this.$loading.next(true);
         return this.http.get<QueryResult<IdentityDto>>('').pipe(tap({
             next: res => {
-                this.$loading.next(false);
-                this.$identity.next(res.data);
+                if(res.data) {
+                    this.identity = res.data;
+                }
             },
-            error: err => {
-                this.$loading.next(false);
-            }
         }));
     }
 

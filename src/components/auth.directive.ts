@@ -6,9 +6,8 @@ import {AuthRepository} from '@identity/repositories/auth.repository';
     selector: '[auth]',
     standalone: true
 })
-export class AuthDirective implements OnInit, OnDestroy {
+export class AuthDirective {
     private hasView = false;
-    private subscription = new Subscription();
     private needleAccesses?: string[];
 
     constructor(
@@ -25,19 +24,9 @@ export class AuthDirective implements OnInit, OnDestroy {
         this.render();
     }
 
-    ngOnInit(): void {
-        this.subscription.add(this.authRepository.$identity.subscribe(e => {
-            this.render();
-        }))
-    }
-
-    ngOnDestroy(): void {
-        this.subscription.unsubscribe();
-    }
-
     render() {
         let granted: boolean;
-        const identity = this.authRepository.$identity.value;
+        const identity = this.authRepository.identity;
         if(identity?.isAdmin) {
             granted = true;
         }

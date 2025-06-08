@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {AuthRepository} from "../repositories/_public";
 import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
 import {HttpErrorResponse} from '@angular/common/http';
+import {AuthRepository} from '../repositories/auth.repository';
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
