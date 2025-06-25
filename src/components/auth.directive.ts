@@ -1,5 +1,4 @@
-import {Directive, Input, OnDestroy, OnInit, TemplateRef, ViewContainerRef} from "@angular/core";
-import {Subscription} from "rxjs";
+import {Directive, Input, TemplateRef, ViewContainerRef} from "@angular/core";
 import {AuthRepository} from '@identity/repositories/auth.repository';
 
 @Directive({

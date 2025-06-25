@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {tap} from "rxjs";
-import {BASE_URL_IDENTITY} from "../identity";
+import {BASE_URL_IDENTITY} from "../configs";
 import {BaseApiRepository} from '@framework/repositories/base-api.repository';
 import {QueryResult} from '@framework/contracts/results';
 import {CaptchaValidateRequest} from '@framework/contracts/captcha';

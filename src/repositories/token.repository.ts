@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {Token} from "@angular/compiler";
-import {BASE_URL_IDENTITY} from "../identity";
+import {BASE_URL_IDENTITY} from "../configs";
 import {BaseApiRepository} from '@framework/repositories/base-api.repository';
 
 @Injectable({providedIn: 'root'})

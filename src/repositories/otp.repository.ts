@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
-import {OtpType} from "../contracts/_public";
-import {BASE_URL_IDENTITY} from "../identity";
+import {OtpType} from "../contracts/auth";
+import {BASE_URL_IDENTITY} from "../configs";
 import {BaseApiRepository} from '@framework/repositories/base-api.repository';
 import {QueryResult} from '@framework/contracts/results';
 

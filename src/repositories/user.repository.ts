@@ -1,10 +1,11 @@
-import {Injectable, Injector} from '@angular/core';
-import {BehaviorSubject, Observable, tap} from "rxjs";
-import {IdentityDto, UserEditRequest} from "../contracts/_public";
-import {BASE_URL_IDENTITY} from "../identity";
-import {BaseCrudRepository} from '@framework/repositories/base-crud.repository';
-import {CommandResult, PagedListResult, QueryResult} from '@framework/contracts/results';
-import {ODataQueryOptions} from '@framework/contracts/odata-query-options';
+import { Injectable, Injector } from '@angular/core';
+import { Observable, tap } from "rxjs";
+import { UserEditRequest } from "../contracts/user";
+import { BASE_URL_IDENTITY } from "../configs";
+import { BaseCrudRepository } from '@framework/repositories/base-crud.repository';
+import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
+import { ODataQueryOptions } from '@framework/contracts/odata-query-options';
+import { IdentityDto } from '../contracts/auth';
 
 export interface PrivilegeSaveRequest {
     startTime?: string;
@@ -12,9 +13,8 @@ export interface PrivilegeSaveRequest {
     accesses: string[];
 }
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class UserRepository extends BaseCrudRepository {
-    $own = new BehaviorSubject<IdentityDto | undefined>(undefined)
 
     constructor(injector: Injector) {
         super(injector, injector.get(BASE_URL_IDENTITY), 'Users');
@@ -25,7 +25,7 @@ export class UserRepository extends BaseCrudRepository {
     }
 
     search(req: { search: any, code: any }): Observable<PagedListResult> {
-        return this.http.get<PagedListResult>(`Search`, {params: req});
+        return this.http.get<PagedListResult>(`Search`, { params: req });
     }
 
     override getAll(): Observable<QueryResult<any[]>> {
@@ -37,11 +37,7 @@ export class UserRepository extends BaseCrudRepository {
     }
 
     getOwn() {
-        return this.http.get<QueryResult>('Own').pipe(tap({
-            next: res => {
-                this.$own.next(res.data);
-            }
-        }));
+        return this.http.get<QueryResult>('Own');
     }
 
     ownChangePassword(req: any) {
