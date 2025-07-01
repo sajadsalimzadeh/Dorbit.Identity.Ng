@@ -39,7 +39,7 @@ export class AuthGuard implements CanActivate {
                                 }
                                 (location as any).reload(true);
                             })
-                        }, 1000)
+                        }, 10000)
                     }
                 }
             })
