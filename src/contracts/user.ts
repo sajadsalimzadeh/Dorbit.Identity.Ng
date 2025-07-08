@@ -1,3 +1,9 @@
+export interface UserDto {
+    id: string;
+    name: string;
+}
+
+
 export interface UserEditRequest {
     name?: string;
     cellphone?: string;

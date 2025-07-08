@@ -1,3 +1,5 @@
+import { UserDto } from "./user";
+
 export interface AuthLoginWithPasswordRequest {
     username: string;
     password: string;
@@ -32,13 +34,8 @@ export interface LoginWithCodeRequest {
     code: string;
 }
 
-export interface IdentityDto<T extends IdentityUserDto = any> {
+export interface IdentityDto<T extends UserDto = any> {
     user: T;
     isAdmin:boolean;
     accessibility: string[];
-}
-
-export interface IdentityUserDto {
-    id: string;
-    name: string;
 }
