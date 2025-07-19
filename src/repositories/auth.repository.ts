@@ -21,8 +21,8 @@ export class AuthRepository extends BaseApiRepository {
         super(injector, injector.get(BASE_URL_IDENTITY), 'Auth');
     }
 
-    getLoginInfo() {
-        return this.http.get<QueryResult<IdentityDto>>('').pipe(tap({
+    getLoginInfo(params?: {firebaseToken?: string}) {
+        return this.http.get<QueryResult<IdentityDto>>('', {params: params ?? {}}).pipe(tap({
             next: res => {
                 if(res.data) {
                     this.identity = res.data;
