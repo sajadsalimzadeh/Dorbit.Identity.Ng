@@ -85,7 +85,7 @@ export class UserRepository extends BaseCrudRepository {
         return this.http.patch<QueryResult<IdentityDto>>('Own', req);
     }
 
-    setOwnWebPushToken(req: any) {
-      return this.http.post<CommandResult>('Own/WebPushToken', req);
+    setOwnWebPushSubscription(req: any) {
+      return this.http.post<CommandResult>('Own/WebPushSubscription', req);
     }
 }
