@@ -6,6 +6,7 @@ import { BaseCrudRepository } from '@framework/repositories/base-crud.repository
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
 import { ODataQueryOptions } from '@framework/contracts/odata-query-options';
 import { IdentityDto } from '../contracts/auth';
+import { UserSendNotificationRequest } from '@identity/contracts/notification';
 
 export interface PrivilegeSaveRequest {
     startTime?: string;
@@ -36,22 +37,6 @@ export class UserRepository extends BaseCrudRepository {
         }));
     }
 
-    getOwn() {
-        return this.http.get<QueryResult>('Own');
-    }
-
-    ownChangePassword(req: any) {
-        return this.http.post<CommandResult>('Own/ChangePassword', req);
-    }
-
-    resetPassword(req: any) {
-        return this.http.post<CommandResult>(`${req.id}/ResetPassword`, req);
-    }
-
-    editOwn(req: UserEditRequest) {
-        return this.http.patch<QueryResult<IdentityDto>>('Own', req);
-    }
-
     getAllPrivilege(id: string) {
         return this.http.get<QueryResult<any[]>>(`${id}/Privileges`)
     }
@@ -72,8 +57,35 @@ export class UserRepository extends BaseCrudRepository {
         return this.http.post<QueryResult<string[]>>(`${req.id}/Active`, req);
     }
 
+    resetPassword(req: any) {
+        return this.http.post<CommandResult>(`${req.id}/ResetPassword`, req);
+    }
+
     setMessage(req: any) {
         return this.http.post<QueryResult>(`${req.id}/Message`, req);
     }
 
+    getOwn() {
+        return this.http.get<QueryResult>('Own');
+    }
+
+    ownChangePassword(req: any) {
+        return this.http.post<CommandResult>('Own/ChangePassword', req);
+    }
+
+    editOwn(req: UserEditRequest) {
+        return this.http.patch<QueryResult<IdentityDto>>('Own', req);
+    }
+
+    setOwnFirebaseToken(token: string) {
+      return this.http.post<CommandResult>('Own/FirebaseToken', { token: token });
+    }
+
+    sendNotification(id: string, req: UserSendNotificationRequest) {
+        return this.http.post<CommandResult>(`${id}/Notifications`, req);
+    }
+
+    sendNotificationOdata(query: ODataQueryOptions, req: UserSendNotificationRequest) {
+        return this.http.post<CommandResult>('odata/Notifications', req, { params: query as any });
+    }
 }
