@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { app } from '@app/app';
 import { UserRepository } from '@identity/repositories/user.repository';
+import { SwPush } from '@angular/service-worker';
 
 @Injectable({ providedIn: 'root' })
 export class PushNotificationService {
 
-    constructor(private userRepository: UserRepository) { }
+    constructor(private userRepository: UserRepository, private swPush: SwPush) { }
 
     async subscribeToNotifications() {
         const permission = await Notification.requestPermission();
@@ -16,6 +17,11 @@ export class PushNotificationService {
         const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: this.urlBase64ToUint8Array(app.settings.webpush.publicKey),
+        });
+        this.swPush.requestSubscription({
+          serverPublicKey: app.settings.webpush.publicKey
+        }).then(sub => {
+          this.userRepository.setOwnWebPushSubscription(sub).subscribe();
         });
 
         console.log('web-push', subscription);
