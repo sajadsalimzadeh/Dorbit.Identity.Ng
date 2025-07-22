@@ -65,6 +65,14 @@ export class UserRepository extends BaseCrudRepository {
         return this.http.post<QueryResult>(`${req.id}/Message`, req);
     }
 
+    sendNotification(id: string, req: UserSendNotificationRequest) {
+        return this.http.post<CommandResult>(`${id}/Notifications`, req);
+    }
+
+    sendNotificationOdata(query: ODataQueryOptions, req: UserSendNotificationRequest) {
+        return this.http.post<CommandResult>('odata/Notifications', req, { params: query as any });
+    }
+
     getOwn() {
         return this.http.get<QueryResult>('Own');
     }
@@ -77,15 +85,7 @@ export class UserRepository extends BaseCrudRepository {
         return this.http.patch<QueryResult<IdentityDto>>('Own', req);
     }
 
-    setOwnFirebaseToken(token: string) {
-      return this.http.post<CommandResult>('Own/FirebaseToken', { token: token });
-    }
-
-    sendNotification(id: string, req: UserSendNotificationRequest) {
-        return this.http.post<CommandResult>(`${id}/Notifications`, req);
-    }
-
-    sendNotificationOdata(query: ODataQueryOptions, req: UserSendNotificationRequest) {
-        return this.http.post<CommandResult>('odata/Notifications', req, { params: query as any });
+    setOwnWebPushToken(req: any) {
+      return this.http.post<CommandResult>('Own/WebPushToken', req);
     }
 }
