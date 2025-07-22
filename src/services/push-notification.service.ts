@@ -20,11 +20,13 @@ export class PushNotificationService {
 
         console.log('web-push', subscription);
 
-        this.userRepository.setOwnWebPushSubscription({
-            endPoint: subscription.endpoint,
-            p256dh: subscription.getKey('p256dh'),
-            auth: subscription.getKey('auth'),
-        }).subscribe();
+        const subObject = subscription.toJSON();
+        const req = {
+            endPoint: subObject.endpoint,
+            p256dh: subObject.keys?.['p256dh'] ?? null,
+            auth: subObject.keys?.['auth'] ?? null,
+        }
+        this.userRepository.setOwnWebPushSubscription(req).subscribe();
     }
 
     private urlBase64ToUint8Array(base64String: string): Uint8Array {
