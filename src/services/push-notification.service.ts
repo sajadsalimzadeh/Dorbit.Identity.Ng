@@ -7,8 +7,20 @@ import { SwPush } from '@angular/service-worker';
 export class PushNotificationService {
 
     constructor(private userRepository: UserRepository, private swPush: SwPush) {
-        this.swPush.messages.subscribe(message => {
+        this.swPush.messages.subscribe((message: any) => {
             console.log('Push message received:', message);
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    message.title ??= 'Trainout';
+                    message.body ??= 'New message';
+                    message.icon ??= '/assets/images/logo.png';
+                    message.data ??= {
+                        url: '/',
+                    };
+
+                    new Notification(message.title, { body: message.body, icon: message.icon, data: message.data });
+                }
+            });
         });
     }
 
