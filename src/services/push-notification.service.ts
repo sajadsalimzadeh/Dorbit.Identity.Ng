@@ -6,7 +6,11 @@ import { SwPush } from '@angular/service-worker';
 @Injectable({ providedIn: 'root' })
 export class PushNotificationService {
 
-    constructor(private userRepository: UserRepository, private swPush: SwPush) { }
+    constructor(private userRepository: UserRepository, private swPush: SwPush) {
+        this.swPush.messages.subscribe(message => {
+            console.log('Push message received:', message);
+        });
+    }
 
     async subscribeToNotifications() {
         const permission = await Notification.requestPermission();
