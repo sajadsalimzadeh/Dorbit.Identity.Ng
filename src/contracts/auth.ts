@@ -5,6 +5,10 @@ export interface AuthLoginWithPasswordRequest {
     password: string;
 }
 
+export interface AuthLoginWithGoogleRequest {
+    token: string;
+}
+
 export enum OtpType {
     Cellphone = 1,
     Email = 2

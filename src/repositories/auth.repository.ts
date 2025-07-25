@@ -6,6 +6,7 @@ import {QueryResult} from '@framework/contracts/results';
 import {CaptchaValidateRequest} from '@framework/contracts/captcha';
 import {
     AuthLoginResponse,
+    AuthLoginWithGoogleRequest,
     AuthLoginWithPasswordRequest,
     AuthRegisterRequest,
     IdentityDto,
@@ -38,6 +39,11 @@ export class AuthRepository extends BaseApiRepository {
             }
         });
     }
+    
+
+  loginWithGoogle(request: AuthLoginWithGoogleRequest) {
+    return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithGoogle', request);
+  }
 
     loginWithOtp(request: LoginWithCodeRequest) {
         return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithOtp', request);
