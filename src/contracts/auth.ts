@@ -40,6 +40,6 @@ export interface LoginWithCodeRequest {
 
 export interface IdentityDto<T extends UserDto = any> {
     user: T;
-    isAdmin:boolean;
+    isFullAccess:boolean;
     accessibility: string[];
 }

@@ -26,7 +26,7 @@ export class AuthDirective {
     render() {
         let granted: boolean;
         const identity = this.authRepository.identity;
-        if(identity?.isAdmin) {
+        if(identity?.isFullAccess) {
             granted = true;
         }
         else if (this.needleAccesses && this.needleAccesses.length > 0) {

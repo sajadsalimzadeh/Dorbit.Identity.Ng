@@ -17,9 +17,11 @@ export class AuthInterceptor implements HttpInterceptor {
                 setHeaders: {
                     Authorization: 'Bearer ' + token
                 },
-                withCredentials: true,
             })
         }
+        req = req.clone({
+            withCredentials: true,
+        });
 
         return next.handle(req).pipe(catchError(e => {
             if (e instanceof HttpErrorResponse) {
