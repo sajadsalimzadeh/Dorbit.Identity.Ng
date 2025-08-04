@@ -2,6 +2,7 @@ import {Injectable, Injector} from '@angular/core';
 import {BASE_URL_IDENTITY} from "../configs";
 import {BaseApiRepository} from '@framework/repositories/base-api.repository';
 import {QueryResult} from '@framework/contracts/results';
+import { Access } from '../contracts/access';
 
 @Injectable({providedIn: 'root'})
 export class AccessRepository extends BaseApiRepository {
@@ -11,6 +12,6 @@ export class AccessRepository extends BaseApiRepository {
     }
 
     getAll() {
-        return this.http.get<QueryResult<any[]>>('')
+        return this.http.get<QueryResult<Access[]>>('')
     }
 }
