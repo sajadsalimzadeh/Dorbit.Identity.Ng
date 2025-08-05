@@ -6,7 +6,7 @@ import { BaseCrudRepository } from '@framework/repositories/base-crud.repository
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
 import { ODataQueryOptions } from '@framework/contracts/odata-query-options';
 import { IdentityDto } from '../contracts/auth';
-import { UserSendNotificationRequest } from '@identity/contracts/notification';
+import { NotificationDto } from '@identity/contracts/notification';
 
 export interface PrivilegeSaveRequest {
     startTime?: string;
@@ -65,12 +65,12 @@ export class UserRepository extends BaseCrudRepository {
         return this.http.post<QueryResult>(`${req.id}/Message`, req);
     }
 
-    sendNotification(id: string, req: UserSendNotificationRequest) {
-        return this.http.post<CommandResult>(`${id}/Notifications`, req);
+    sendNotification(id: string, notification: NotificationDto) {
+        return this.http.post<CommandResult>(`${id}/Notifications`, notification);
     }
 
-    sendNotificationOdata(query: ODataQueryOptions, req: UserSendNotificationRequest) {
-        return this.http.post<CommandResult>('odata/Notifications', req, { params: query as any });
+    sendAllNotification(ids: string[], notification: NotificationDto) {
+        return this.http.post<CommandResult>(`Notifications`, { userIds: ids, notification: notification });
     }
 
     getOwn() {
