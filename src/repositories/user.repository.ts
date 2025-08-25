@@ -7,12 +7,7 @@ import { CommandResult, PagedListResult, QueryResult } from '@framework/contract
 import { ODataQueryOptions } from '@framework/contracts/odata-query-options';
 import { IdentityDto } from '../contracts/auth';
 import { NotificationDto } from '@identity/contracts/notification';
-
-export interface PrivilegeSaveRequest {
-    startTime?: string;
-    endTime?: string;
-    accesses: string[];
-}
+import { PrivilegeSaveRequest } from '@identity/contracts/privilege';
 
 @Injectable({ providedIn: 'root' })
 export class UserRepository extends BaseCrudRepository {
@@ -37,18 +32,6 @@ export class UserRepository extends BaseCrudRepository {
         }));
     }
 
-    getAllPrivilege(id: string) {
-        return this.http.get<QueryResult<any[]>>(`${id}/Privileges`)
-    }
-
-    getAllToken(id: string) {
-        return this.http.get<QueryResult<any[]>>(`${id}/Tokens`)
-    }
-
-    savePrivileges(id: string, request: PrivilegeSaveRequest) {
-        return this.http.post<QueryResult<string[]>>(`${id}/Privileges`, request);
-    }
-
     deActive(req: any) {
         return this.http.post<QueryResult<string[]>>(`${req.id}/DeActive`, req);
     }
@@ -63,6 +46,22 @@ export class UserRepository extends BaseCrudRepository {
 
     setMessage(req: any) {
         return this.http.post<QueryResult>(`${req.id}/Message`, req);
+    }
+
+    getAllPrivilege(id: string) {
+        return this.http.get<QueryResult<any[]>>(`${id}/Privileges`)
+    }
+
+    savePrivileges(id: string, request: PrivilegeSaveRequest) {
+        return this.http.post<QueryResult<string[]>>(`${id}/Privileges`, request);
+    }
+
+    deletePrivilege(id: string, privilegeId: string) {
+        return this.http.delete<QueryResult<string[]>>(`${id}/Privileges/${privilegeId}`);
+    }
+
+    getAllToken(id: string) {
+        return this.http.get<QueryResult<any[]>>(`${id}/Tokens`)
     }
 
     sendNotification(id: string, notification: NotificationDto) {
@@ -86,6 +85,6 @@ export class UserRepository extends BaseCrudRepository {
     }
 
     setOwnWebPushSubscription(req: any) {
-      return this.http.post<CommandResult>('Own/WebPushSubscription', req);
+        return this.http.post<CommandResult>('Own/WebPushSubscription', req);
     }
 }

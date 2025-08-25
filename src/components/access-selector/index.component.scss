@@ -1,0 +1,14 @@
+p-tree-select {
+    width: 100%;
+    display: flex;
+
+    ::ng-deep {
+        .p-treeselect {
+            width: 100%;
+        }
+
+        .p-treeselect-label {
+            padding-top: var(--iftalabel-input-padding-top) !important;
+        }
+    }
+}
