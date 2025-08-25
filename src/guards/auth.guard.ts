@@ -4,10 +4,12 @@ import {TranslateService} from "@ngx-translate/core";
 import {MessageService} from "primeng/api";
 import {HttpErrorResponse} from '@angular/common/http';
 import {AuthRepository} from '../repositories/auth.repository';
+import { HubService } from '@app/services/hub.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthGuard implements CanActivate {
     constructor(
+        private hubService: HubService,
         private authRepository: AuthRepository,
         private messageService: MessageService,
         private translateService: TranslateService,
@@ -20,8 +22,11 @@ export class AuthGuard implements CanActivate {
                 next: res => {
                     if (!res.success) {
                         this.gotoLoginPage();
+                        return;
                     }
 
+
+                    this.hubService.connect();
                     resolve(res.success);
                 },
                 error: e => {

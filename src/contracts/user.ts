@@ -1,3 +1,5 @@
+import { OtpType } from "./auth";
+
 export interface UserDto {
     id: string;
     name: string;
@@ -5,9 +7,9 @@ export interface UserDto {
     code: number;
     hasPassword: boolean;
     cellphone: string;
-    cellphoneValidateTime: Date;
+    cellphoneConfirmTime: Date;
     email: string;
-    emailValidateTime: Date;
+    emailConfirmTime: Date;
     
     authenticatorKey: string;
     authenticatorValidateTime: Date;
@@ -40,3 +42,8 @@ export const UserStatusOptions = [
     { label: 'فعال', value: UserStatus.Active },
     { label: 'غیر فعال', value: UserStatus.InActive },
 ]
+
+export interface UserVerifyRequest {
+    type: OtpType;
+    code: string;
+}
