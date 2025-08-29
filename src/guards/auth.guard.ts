@@ -1,11 +1,11 @@
-import {Injectable} from '@angular/core';
-import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
-import {TranslateService} from "@ngx-translate/core";
-import {MessageService} from "primeng/api";
-import {HttpErrorResponse} from '@angular/common/http';
-import {AuthRepository} from '../repositories/auth.repository';
+import { Injectable } from '@angular/core';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { TranslateService } from "@ngx-translate/core";
+import { MessageService } from "primeng/api";
+import { HttpErrorResponse } from '@angular/common/http';
+import { AuthRepository } from '../repositories/auth.repository';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthGuard implements CanActivate {
     constructor(
         private authRepository: AuthRepository,
@@ -20,6 +20,7 @@ export class AuthGuard implements CanActivate {
                 next: res => {
                     if (!res.success) {
                         this.gotoLoginPage();
+                        return;
                     }
 
                     resolve(res.success);
@@ -31,7 +32,7 @@ export class AuthGuard implements CanActivate {
                     });
                     reject(e);
 
-                    if(e instanceof HttpErrorResponse && e.status != 401) {
+                    if (e instanceof HttpErrorResponse && e.status != 401) {
                         setTimeout(() => {
                             caches.keys().then(async cacheKeys => {
                                 for (const cacheKey of cacheKeys) {

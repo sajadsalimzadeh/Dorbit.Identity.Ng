@@ -39,7 +39,7 @@ export interface LoginWithCodeRequest {
     code: string;
 }
 
-export interface IdentityDto<T extends UserDto = any> {
+export interface IdentityDto<T extends UserDto = UserDto> {
     user: T;
     isFullAccess:boolean;
     accessibility: string[];
