@@ -45,5 +45,6 @@ export const UserStatusOptions = [
 
 export interface UserVerifyRequest {
     type: OtpType;
+    receiver: string;
     code: string;
 }

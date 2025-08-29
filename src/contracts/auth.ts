@@ -1,3 +1,4 @@
+import { OtpValidateRequest } from "./otp";
 import { UserDto } from "./user";
 
 export interface AuthLoginWithPasswordRequest {
@@ -25,7 +26,7 @@ export interface AuthRegisterRequest {
     username: string;
     email: string;
     password: string;
-    otpCode: string;
+    otpValidation: OtpValidateRequest;
 }
 
 export interface AuthLoginResponse {
@@ -42,4 +43,6 @@ export interface IdentityDto<T extends UserDto = any> {
     user: T;
     isFullAccess:boolean;
     accessibility: string[];
+    isCellphoneVerificationRequired: boolean;
+    isEmailVerificationRequired: boolean;
 }
