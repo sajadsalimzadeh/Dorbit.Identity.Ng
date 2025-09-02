@@ -1,10 +1,11 @@
-import {Injectable, Injector} from '@angular/core';
-import {tap} from "rxjs";
-import {BASE_URL_IDENTITY} from "../configs";
-import {BaseApiRepository} from '@framework/repositories/base-api.repository';
-import {QueryResult} from '@framework/contracts/results';
-import {CaptchaValidateRequest} from '@framework/contracts/captcha';
+import { Injectable, Injector } from '@angular/core';
+import { tap } from "rxjs";
+import { BASE_URL_IDENTITY } from "../configs";
+import { BaseApiRepository } from '@framework/repositories/base-api.repository';
+import { QueryResult } from '@framework/contracts/results';
+import { CaptchaValidateRequest } from '@framework/contracts/captcha';
 import {
+    AuthForgetPasswordRequest,
     AuthLoginResponse,
     AuthLoginWithGoogleRequest,
     AuthLoginWithPasswordRequest,
@@ -13,7 +14,7 @@ import {
     LoginWithCodeRequest
 } from '../contracts/auth';
 
-@Injectable({providedIn: 'root'})
+@Injectable({ providedIn: 'root' })
 export class AuthRepository extends BaseApiRepository {
 
     identity!: IdentityDto;
@@ -22,10 +23,10 @@ export class AuthRepository extends BaseApiRepository {
         super(injector, injector.get(BASE_URL_IDENTITY), 'Auth');
     }
 
-    getLoginInfo(params?: {firebaseToken?: string}) {
-        return this.http.get<QueryResult<IdentityDto>>('', {params: params ?? {}}).pipe(tap({
+    getLoginInfo(params?: { firebaseToken?: string }) {
+        return this.http.get<QueryResult<IdentityDto>>('', { params: params ?? {} }).pipe(tap({
             next: res => {
-                if(res.data) {
+                if (res.data) {
                     this.identity = res.data;
                 }
             },
@@ -39,11 +40,11 @@ export class AuthRepository extends BaseApiRepository {
             }
         });
     }
-    
 
-  loginWithGoogle(request: AuthLoginWithGoogleRequest) {
-    return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithGoogle', request);
-  }
+
+    loginWithGoogle(request: AuthLoginWithGoogleRequest) {
+        return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithGoogle', request);
+    }
 
     loginWithOtp(request: LoginWithCodeRequest) {
         return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithOtp', request);
@@ -51,6 +52,10 @@ export class AuthRepository extends BaseApiRepository {
 
     register(req: AuthRegisterRequest) {
         return this.http.post<QueryResult<AuthLoginResponse>>('Register', req)
+    }
+
+    forgetPassword(req: AuthForgetPasswordRequest) {
+        return this.http.post<QueryResult<AuthLoginResponse>>('ForgetPassword', req);
     }
 
     logout() {

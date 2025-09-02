@@ -29,6 +29,11 @@ export interface AuthRegisterRequest {
     otpValidation: OtpValidateRequest;
 }
 
+export interface AuthForgetPasswordRequest {
+    password: string;
+    otpValidation: OtpValidateRequest;
+}
+
 export interface AuthLoginResponse {
     accessToken: string;
     isNeedTwoFactorAuthentication: boolean;
