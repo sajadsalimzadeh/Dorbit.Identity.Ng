@@ -7,9 +7,9 @@ export interface UserDto {
     code: number;
     hasPassword: boolean;
     cellphone: string;
-    cellphoneConfirmTime: Date;
+    cellphoneVerificationTime: Date;
     email: string;
-    emailConfirmTime: Date;
+    emailVerificationTime: Date;
     
     authenticatorKey: string;
     authenticatorValidateTime: Date;

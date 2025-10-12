@@ -25,7 +25,7 @@ export interface AuthRegisterRequest {
     name: string;
     username: string;
     email: string;
-    password: string;
+    password?: string;
     otpValidation: OtpValidateRequest;
 }
 
