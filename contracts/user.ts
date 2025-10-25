@@ -1,6 +1,6 @@
 import { OtpType } from "./auth";
 
-export interface UserDto {
+export interface User {
     id: string;
     name: string;
     username: string;

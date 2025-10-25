@@ -1,5 +1,5 @@
 import { OtpValidateRequest } from "./otp";
-import { UserDto } from "./user";
+import { User } from "./user";
 
 export interface AuthLoginWithPasswordRequest {
     username: string;
@@ -44,7 +44,7 @@ export interface LoginWithCodeRequest {
     code: string;
 }
 
-export interface IdentityDto<T extends UserDto = UserDto> {
+export interface IdentityDto<T extends User = User> {
     user: T;
     isFullAccess:boolean;
     accessibility: string[];
