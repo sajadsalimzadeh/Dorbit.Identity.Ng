@@ -7,7 +7,8 @@ export interface AuthLoginWithPasswordRequest {
 }
 
 export interface AuthLoginWithGoogleRequest {
-    token: string;
+    authorizationCode: string;
+    redirectUrl: string;
 }
 
 export enum OtpType {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { app } from '@app/app';
+import { appSettings } from '@app/app';
 import { UserRepository } from '@identity/repositories/user.repository';
 import { SwPush } from '@angular/service-worker';
 
@@ -28,7 +28,7 @@ export class PushNotificationService {
         const permission = await Notification.requestPermission();
         if (permission !== 'granted') return;
         this.swPush.requestSubscription({
-            serverPublicKey: app.settings.webpush.publicKey
+            serverPublicKey: appSettings.webpush.publicKey
         }).then(subscription => {
             console.log('web-push', subscription);
 
