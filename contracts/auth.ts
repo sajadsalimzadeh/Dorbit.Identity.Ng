@@ -11,6 +11,11 @@ export interface AuthLoginWithGoogleRequest {
     redirectUrl: string;
 }
 
+export interface AuthLoginWithAppleRequest {
+    authorizationCode: string;
+    redirectUrl: string;
+}
+
 export enum OtpType {
     Cellphone = 1,
     Email = 2

@@ -7,6 +7,7 @@ import { CaptchaValidateRequest } from '@framework/contracts/captcha';
 import {
     AuthForgetPasswordRequest,
     AuthLoginResponse,
+    AuthLoginWithAppleRequest,
     AuthLoginWithGoogleRequest,
     AuthLoginWithPasswordRequest,
     AuthRegisterRequest,
@@ -44,6 +45,10 @@ export class AuthRepository extends BaseApiRepository {
 
     loginWithGoogle(request: AuthLoginWithGoogleRequest) {
         return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithGoogle', request);
+    }
+
+    loginWithApple(request: AuthLoginWithAppleRequest) {
+      return this.http.post<QueryResult<AuthLoginResponse>>('LoginWithApple', request);
     }
 
     loginWithOtp(request: LoginWithCodeRequest) {
