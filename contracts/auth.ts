@@ -54,6 +54,6 @@ export interface IdentityDto<T extends User = User> {
     user: T;
     isFullAccess:boolean;
     accessibility: string[];
-    isCellphoneVerificationRequired: boolean;
+    isCellphoneVerified: boolean;
     isEmailVerificationRequired: boolean;
 }
