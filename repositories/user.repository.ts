@@ -1,13 +1,13 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable, tap } from "rxjs";
-import { UserEditRequest, UserVerifyRequest } from "../contracts/user";
+import { UserEditRequest, UserPrivilege, UserVerifyRequest } from "../contracts/user";
 import { BASE_URL_IDENTITY } from "../configs";
 import { BaseCrudRepository } from '@framework/repositories/base-crud.repository';
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
 import { ODataQueryOptions } from '@framework/contracts/odata-query-options';
 import { IdentityDto } from '../contracts/auth';
 import { NotificationDto } from '@identity/contracts/notification';
-import { PrivilegeSaveRequest } from '@identity/contracts/privilege';
+import { UserPrivilegeSaveRequest } from '@identity/contracts/privilege';
 
 @Injectable({ providedIn: 'root' })
 export class UserRepository extends BaseCrudRepository {
@@ -49,11 +49,11 @@ export class UserRepository extends BaseCrudRepository {
     }
 
     getAllPrivilege(id: string) {
-        return this.http.get<QueryResult<any[]>>(`${id}/Privileges`)
+        return this.http.get<QueryResult<UserPrivilege[]>>(`${id}/Privileges`)
     }
 
-    savePrivileges(id: string, request: PrivilegeSaveRequest) {
-        return this.http.post<QueryResult<string[]>>(`${id}/Privileges`, request);
+    savePrivileges(id: string, request: UserPrivilegeSaveRequest) {
+        return this.http.post<QueryResult<UserPrivilege>>(`${id}/Privileges`, request);
     }
 
     deletePrivilege(id: string, privilegeId: string) {

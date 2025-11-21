@@ -5,15 +5,16 @@ export interface Privilege {
     to: string;
     roleIds: string[];
     accessibility: string[];
-    isAdmin: boolean;
+    isFullAccess: boolean;
 }
 
-export interface PrivilegeSaveRequest {
+export interface UserPrivilegeSaveRequest {
     id?: string;
+    tenantId?: string;
     userId: string;
-    from: string;
-    to: string;
+    from?: string;
+    to?: string;
     roleIds: string[];
     accessibility: string[];
-    isAdmin: boolean;
+    isFullAccess: boolean;
 }

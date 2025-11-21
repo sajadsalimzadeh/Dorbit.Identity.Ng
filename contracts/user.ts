@@ -48,3 +48,15 @@ export interface UserVerifyRequest {
     receiver: string;
     code: string;
 }
+
+export interface UserPrivilege {
+    id: string;
+    userId: string;
+    tenantId?: string;
+    from?: Date;
+    to?: Date;
+    isFullAccess?: boolean;
+    roleIds?: string[];
+    accessibility: string[];
+}
+
