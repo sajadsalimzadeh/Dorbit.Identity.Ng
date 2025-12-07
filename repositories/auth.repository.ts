@@ -24,6 +24,11 @@ export class AuthRepository extends BaseApiRepository {
         super(injector, injector.get(BASE_URL_IDENTITY), 'Auth');
     }
 
+    hasAccess(access: string) {
+        access = access.toLowerCase();
+        return this.identity.isFullAccess || this.identity.accessibility.some(x => x == access);
+    }
+
     getLoginInfo(params?: { firebaseToken?: string }) {
         return this.http.get<QueryResult<IdentityDto>>('', { params: params ?? {} }).pipe(tap({
             next: res => {

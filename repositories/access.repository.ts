@@ -14,4 +14,8 @@ export class AccessRepository extends BaseApiRepository {
     getAll() {
         return this.http.get<QueryResult<Access[]>>('')
     }
+
+    getDictionary() {
+        return this.http.get<QueryResult<{ [key: string]: string[] }>>('Dictionary')
+    }
 }
