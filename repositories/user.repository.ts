@@ -6,7 +6,7 @@ import { BaseCrudRepository } from '@framework/repositories/base-crud.repository
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
 import { ODataQueryOptions } from '@framework/contracts/odata-query-options';
 import { IdentityDto } from '../contracts/auth';
-import { NotificationDto } from '@identity/contracts/notification';
+import { NotificationDto, UserNotifySubscriptionRequest } from '@identity/contracts/notification';
 import { UserPrivilegeSaveRequest } from '@identity/contracts/privilege';
 
 @Injectable({ providedIn: 'root' })
@@ -84,8 +84,8 @@ export class UserRepository extends BaseCrudRepository {
         return this.http.patch<QueryResult<IdentityDto>>('Own', req);
     }
 
-    setOwnWebPushSubscription(req: any) {
-        return this.http.post<CommandResult>('Own/WebPushSubscription', req);
+    setOwnNotifySubscription(req: UserNotifySubscriptionRequest) {
+        return this.http.post<CommandResult>('Own/NotifySubscription', req);
     }
 
     verifyOwn(req: UserVerifyRequest) {
