@@ -5,9 +5,8 @@ export interface NotificationDto {
 }
 
 export interface UserNotifySubscriptionRequest {
-    endPoint?: string;
+    type: 'web-push' | 'ios' | 'android';
+    token?: string;
     p256dh?: string;
     auth?: string;
-    fcmToken?: string;
-    apnToken?: string;
 }
