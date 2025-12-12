@@ -30,21 +30,13 @@ export class PushNotificationService {
 
         if (nativeService.isNative) {
             const message = JSON.parse(localStorage.getItem('notification-token') ?? '{}');
-            let req: UserNotifySubscriptionRequest | undefined;
-            if (message.platform == 'ios') {
-                req = {
-                    apnToken: message.token,
-                }
-            } else if (message.platform == 'android') {
-                req = {
-                    fcmToken: message.token,
-                }
-            }
-            if (req) {
-                this.userRepository.setOwnNotifySubscription(req).subscribe((res) => {
-                    localStorage.removeItem('notification-token');
-                });
-            }
+            let req = {
+                type: message.platform,
+                token: message.token,
+            } as UserNotifySubscriptionRequest;
+            this.userRepository.setOwnNotifySubscription(req).subscribe((res) => {
+                localStorage.removeItem('notification-token');
+            });
         } else {
             const permission = await Notification.requestPermission();
             if (permission !== 'granted') return;
@@ -52,13 +44,13 @@ export class PushNotificationService {
                 serverPublicKey: appSettings.webpush.publicKey
             }).then(subscription => {
                 console.log('web-push', subscription);
-
                 const subObject = subscription.toJSON();
                 const req = {
-                    endPoint: subObject.endpoint,
+                    type: 'web-push',
+                    token: subObject.endpoint,
                     p256dh: subObject.keys?.['p256dh'],
                     auth: subObject.keys?.['auth'],
-                }
+                } as UserNotifySubscriptionRequest
                 this.userRepository.setOwnNotifySubscription(req).subscribe();
             });
         }
