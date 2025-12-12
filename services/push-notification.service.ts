@@ -40,8 +40,10 @@ export class PushNotificationService {
                     fcmToken: message.token,
                 }
             }
+            alert(JSON.stringify(req));
             if (req) {
-                this.userRepository.setOwnNotifySubscription(req).subscribe(() => {
+                this.userRepository.setOwnNotifySubscription(req).subscribe((res) => {
+                    alert(JSON.stringify(res));
                     localStorage.removeItem('push-notification');
                 });
             }
