@@ -29,7 +29,7 @@ export class PushNotificationService {
     async subscribeToNotifications() {
 
         if (nativeService.isNative) {
-            const message = JSON.parse(localStorage.getItem('push-notification') ?? '{}');
+            const message = JSON.parse(localStorage.getItem('notification-token') ?? '{}');
             let req: UserNotifySubscriptionRequest | undefined;
             if (message.platform == 'ios') {
                 req = {
@@ -40,11 +40,9 @@ export class PushNotificationService {
                     fcmToken: message.token,
                 }
             }
-            alert(JSON.stringify(req));
             if (req) {
                 this.userRepository.setOwnNotifySubscription(req).subscribe((res) => {
-                    alert(JSON.stringify(res));
-                    localStorage.removeItem('push-notification');
+                    localStorage.removeItem('notification-token');
                 });
             }
         } else {
