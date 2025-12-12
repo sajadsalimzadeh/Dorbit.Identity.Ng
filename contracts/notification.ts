@@ -4,8 +4,16 @@ export interface NotificationDto {
     data: any;
 }
 
+export enum UserNotifySubscriptionType {
+    None = 0,
+    WebPush = 1,
+    Expo = 2,
+    Fcm = 3,
+    Apn = 4,
+}
+
 export interface UserNotifySubscriptionRequest {
-    type: 'web-push' | 'ios' | 'android';
+    type: UserNotifySubscriptionType;
     token?: string;
     p256dh?: string;
     auth?: string;

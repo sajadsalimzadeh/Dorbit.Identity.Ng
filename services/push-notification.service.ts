@@ -3,7 +3,7 @@ import { appSettings } from '@app/app';
 import { UserRepository } from '@identity/repositories/user.repository';
 import { SwPush } from '@angular/service-worker';
 import { nativeService } from '@app/services/native.service';
-import { UserNotifySubscriptionRequest } from '@identity/contracts/notification';
+import { UserNotifySubscriptionRequest, UserNotifySubscriptionType } from '@identity/contracts/notification';
 
 @Injectable({ providedIn: 'root' })
 export class PushNotificationService {
@@ -31,7 +31,7 @@ export class PushNotificationService {
         if (nativeService.isNative) {
             const message = JSON.parse(localStorage.getItem('notification-token') ?? '{}');
             let req = {
-                type: message.platform,
+                type: UserNotifySubscriptionType.Expo,
                 token: message.token,
             } as UserNotifySubscriptionRequest;
             this.userRepository.setOwnNotifySubscription(req).subscribe((res) => {
@@ -46,7 +46,7 @@ export class PushNotificationService {
                 console.log('web-push', subscription);
                 const subObject = subscription.toJSON();
                 const req = {
-                    type: 'web-push',
+                    type: UserNotifySubscriptionType.WebPush,
                     token: subObject.endpoint,
                     p256dh: subObject.keys?.['p256dh'],
                     auth: subObject.keys?.['auth'],
