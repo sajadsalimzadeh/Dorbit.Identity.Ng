@@ -29,14 +29,22 @@ export class PushNotificationService {
     async subscribeToNotifications() {
 
         if (nativeService.isNative) {
-            nativeService.on('push-notification').subscribe((message) => {
-                const req = (message.platform == 'ios' ? {
+            const message = JSON.parse(localStorage.getItem('push-notification') ?? '{}');
+            let req: UserNotifySubscriptionRequest | undefined;
+            if (message.platform == 'ios') {
+                req = {
                     apnToken: message.token,
-                } : {
+                }
+            } else if (message.platform == 'android') {
+                req = {
                     fcmToken: message.token,
-                }) as UserNotifySubscriptionRequest;
-                this.userRepository.setOwnNotifySubscription(req).subscribe();
-            });
+                }
+            }
+            if (req) {
+                this.userRepository.setOwnNotifySubscription(req).subscribe(() => {
+                    localStorage.removeItem('push-notification');
+                });
+            }
         } else {
             const permission = await Notification.requestPermission();
             if (permission !== 'granted') return;
