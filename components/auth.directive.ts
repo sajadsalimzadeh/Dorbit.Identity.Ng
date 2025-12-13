@@ -18,14 +18,15 @@ export class AuthDirective {
 
     @Input() set auth(value: string | string[] | undefined) {
         if(typeof value === 'undefined') this.needleAccesses = [];
-        else if(typeof value === 'string') this.needleAccesses = [value];
-        else this.needleAccesses = value;
+        else if(typeof value === 'string') this.needleAccesses = [value.toLowerCase()];
+        else this.needleAccesses = value.map(x => x.toLowerCase());
         this.render();
     }
 
     render() {
         let granted: boolean;
         const identity = this.authRepository.identity;
+        
         if(identity?.isFullAccess) {
             granted = true;
         }
@@ -34,6 +35,7 @@ export class AuthDirective {
         } else {
             granted = true;
         }
+
         if (granted && !this.hasView) {
             this.viewContainer.createEmbeddedView(this.templateRef);
             this.hasView = true;
