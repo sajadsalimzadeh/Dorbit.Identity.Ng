@@ -13,7 +13,7 @@ export interface User {
     
     authenticatorKey: string;
     authenticatorValidateTime: Date;
-    thumbnail: string;
+    thumbnailFilename: string;
     
     needResetPassword: boolean;
     status: UserStatus;
@@ -30,6 +30,7 @@ export interface UserEditRequest {
     name?: string;
     cellphone?: string;
     email?: string;
+    thumbnailFilename?: string;
 }
 
 export enum UserStatus
