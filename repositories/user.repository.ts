@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable, tap } from "rxjs";
-import { UserEditRequest, UserPrivilege, UserVerifyRequest } from "../contracts/user";
+import { User, UserEditRequest, UserPrivilege, UserVerifyRequest } from "../contracts/user";
 import { BASE_URL_IDENTITY } from "../configs";
 import { BaseCrudRepository } from '@framework/repositories/base-crud.repository';
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
@@ -73,7 +73,7 @@ export class UserRepository extends BaseCrudRepository {
     }
 
     getOwn() {
-        return this.http.get<QueryResult>('Own');
+        return this.http.get<QueryResult<User>>('Own');
     }
 
     ownChangePassword(req: any) {
