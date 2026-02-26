@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { tap } from "rxjs";
-import { BASE_URL_IDENTITY } from "../configs";
+import { BASE_API_URL_IDENTITY } from "../configs";
 import { BaseApiRepository } from '@framework/repositories/base-api.repository';
 import { QueryResult } from '@framework/contracts/results';
 import { CaptchaValidateRequest } from '@framework/contracts/captcha';
@@ -21,7 +21,7 @@ export class AuthRepository extends BaseApiRepository {
     identity!: IdentityDto;
 
     constructor(injector: Injector) {
-        super(injector, injector.get(BASE_URL_IDENTITY), 'Auth');
+        super(injector, injector.get(BASE_API_URL_IDENTITY), 'Auth');
     }
 
     hasAccess(access: string) {

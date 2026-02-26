@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {OtpType} from "../contracts/auth";
-import {BASE_URL_IDENTITY} from "../configs";
+import {BASE_API_URL_IDENTITY} from "../configs";
 import {BaseApiRepository} from '@framework/repositories/base-api.repository';
 import {QueryResult} from '@framework/contracts/results';
 import { OtpSendRequest } from '@identity/contracts/otp';
@@ -9,7 +9,7 @@ import { OtpSendRequest } from '@identity/contracts/otp';
 export class OtpRepository extends BaseApiRepository {
 
     constructor(injector: Injector) {
-        super(injector, injector.get(BASE_URL_IDENTITY), 'Otps');
+        super(injector, injector.get(BASE_API_URL_IDENTITY), 'Otps');
     }
 
     getAll() {

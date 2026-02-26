@@ -1,7 +1,7 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable, tap } from "rxjs";
 import { User, UserEditRequest, UserPrivilege, UserVerifyRequest } from "../contracts/user";
-import { BASE_URL_IDENTITY } from "../configs";
+import { BASE_API_URL_IDENTITY } from "../configs";
 import { BaseCrudRepository } from '@framework/repositories/base-crud.repository';
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
 import { ODataQueryOptions } from '@framework/contracts/odata-query-options';
@@ -13,7 +13,7 @@ import { UserPrivilegeSaveRequest } from '@identity/contracts/privilege';
 export class UserRepository extends BaseCrudRepository {
 
     constructor(injector: Injector) {
-        super(injector, injector.get(BASE_URL_IDENTITY), 'Users');
+        super(injector, injector.get(BASE_API_URL_IDENTITY), 'Users');
     }
 
     override select(query?: ODataQueryOptions): Observable<PagedListResult> {

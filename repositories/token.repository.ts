@@ -1,6 +1,6 @@
 import {Injectable, Injector} from '@angular/core';
 import {Token} from "@angular/compiler";
-import {BASE_URL_IDENTITY} from "../configs";
+import {BASE_API_URL_IDENTITY} from "../configs";
 import {BaseApiRepository} from '@framework/repositories/base-api.repository';
 
 @Injectable({providedIn: 'root'})
@@ -8,7 +8,7 @@ export class TokenRepository extends BaseApiRepository {
 
 
     constructor(injector: Injector) {
-        super(injector, injector.get(BASE_URL_IDENTITY), 'Tokens');
+        super(injector, injector.get(BASE_API_URL_IDENTITY), 'Tokens');
     }
 
     terminate(id: string) {
