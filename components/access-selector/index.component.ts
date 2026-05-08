@@ -1,11 +1,16 @@
+import { CommonModule } from "@angular/common";
 import { Component, Injector, Input } from "@angular/core";
-import { FormControl } from "@angular/forms";
+import { FormControl, ReactiveFormsModule } from "@angular/forms";
 import { AccessRepository } from "@identity/repositories/access.repository";
+import { TranslateModule } from "@ngx-translate/core";
 import { PrimengComponent } from "@primeng/components/primeng.component";
 import { TreeNode } from "primeng/api";
+import { IftaLabelModule } from "primeng/iftalabel";
+import { TreeSelectModule } from "primeng/treeselect";
 
 @Component({
-    standalone: false,
+    standalone: true,
+    imports: [CommonModule, ReactiveFormsModule, TranslateModule, TreeSelectModule, IftaLabelModule],
     selector: 'app-access-selector',
     templateUrl: './index.component.html',
     styleUrl: './index.component.scss'
