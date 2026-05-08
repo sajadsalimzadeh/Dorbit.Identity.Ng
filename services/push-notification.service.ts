@@ -1,4 +1,4 @@
-import { Inject, Injectable, InjectionToken } from '@angular/core';
+import { Inject, Injectable, InjectionToken, Injector } from '@angular/core';
 import { UserRepository } from '@identity/repositories/user.repository';
 import { SwPush } from '@angular/service-worker';
 import { nativeService } from '@app/services/native.service';
@@ -9,7 +9,7 @@ export const WEB_PUSH_PUBLIC_KEY = new InjectionToken<string>('web-push-public-k
 @Injectable({ providedIn: 'root' })
 export class PushNotificationService {
 
-    constructor(private userRepository: UserRepository, private swPush: SwPush, @Inject(WEB_PUSH_PUBLIC_KEY) private webPushPublicKey: string) {
+    constructor(private injector: Injector, private userRepository: UserRepository, private swPush: SwPush) {
         this.swPush.messages.subscribe((message: any) => {
             console.log('Push message received:', message);
             // Notification.requestPermission().then(permission => {
@@ -28,6 +28,7 @@ export class PushNotificationService {
     }
 
     async subscribeToNotifications() {
+        const webPushPublicKey = this.injector.get(WEB_PUSH_PUBLIC_KEY);
 
         if (nativeService.isNative) {
             const message = JSON.parse(localStorage.getItem('notification-token') ?? '{}');
@@ -42,7 +43,7 @@ export class PushNotificationService {
             const permission = await Notification.requestPermission();
             if (permission !== 'granted') return;
             this.swPush.requestSubscription({
-                serverPublicKey: this.webPushPublicKey
+                serverPublicKey: webPushPublicKey
             }).then((subscription: PushSubscription) => {
                 console.log('web-push', subscription);
                 const subObject = subscription.toJSON();
