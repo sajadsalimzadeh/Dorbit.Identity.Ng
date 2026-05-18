@@ -1,6 +1,6 @@
 import { OtpType } from "./auth";
 
-export interface User {
+export interface UserBase {
     id: string;
     name: string;
     username: string;
@@ -54,8 +54,8 @@ export interface UserPrivilege {
     id: string;
     userId: string;
     tenantId?: string;
-    from?: Date;
-    to?: Date;
+    from?: string;
+    to?: string;
     isFullAccess?: boolean;
     roleIds?: string[];
     accessibility: string[];

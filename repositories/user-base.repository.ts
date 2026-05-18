@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable, tap } from "rxjs";
-import { User, UserEditRequest, UserPrivilege, UserVerifyRequest } from "../contracts/user";
+import { UserBase, UserEditRequest, UserPrivilege, UserVerifyRequest } from "../contracts/user";
 import { BASE_API_URL_IDENTITY } from "../configs";
 import { BaseCrudRepository } from '@framework/repositories/base-crud.repository';
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
@@ -10,7 +10,7 @@ import { NotificationDto, UserNotifySubscriptionRequest } from '@identity/contra
 import { UserPrivilegeSaveRequest } from '@identity/contracts/privilege';
 
 @Injectable({ providedIn: 'root' })
-export class UserRepository extends BaseCrudRepository {
+export class UserBaseRepository extends BaseCrudRepository {
 
     constructor(injector: Injector) {
         super(injector, injector.get(BASE_API_URL_IDENTITY), 'Users');
@@ -73,7 +73,7 @@ export class UserRepository extends BaseCrudRepository {
     }
 
     getOwn() {
-        return this.http.get<QueryResult<User>>('Own');
+        return this.http.get<QueryResult<UserBase>>('Own');
     }
 
     ownChangePassword(req: any) {
