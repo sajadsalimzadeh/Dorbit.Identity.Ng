@@ -6,3 +6,8 @@ export interface Role extends FullEntity {
     description: string;
     accessibility: string[];
 }
+
+export interface RoleMinimal {
+    id: string;
+    name: string;
+}

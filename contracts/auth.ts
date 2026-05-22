@@ -22,9 +22,7 @@ export enum OtpType {
 }
 
 export interface AuthLoginWithOtpRequest {
-    type: OtpType;
-    receiver: string;
-    code: string;
+    otpValidation: OtpValidateRequest;
 }
 
 export interface AuthRegisterRequest {
@@ -46,8 +44,8 @@ export interface AuthLoginResponse {
 }
 
 export interface LoginWithCodeRequest {
-    receiver: string;
-    code: string;
+
+    otpValidation: OtpValidateRequest;
 }
 
 export interface IdentityDto<T extends UserBase = UserBase> {

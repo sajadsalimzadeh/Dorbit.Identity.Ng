@@ -25,6 +25,11 @@ export interface UserBase {
     firebaseTokens: string[];
 }
 
+export interface UserMinimal {
+    id: string;
+    name: string;
+    username: string;
+}
 
 export interface UserEditRequest {
     name?: string;

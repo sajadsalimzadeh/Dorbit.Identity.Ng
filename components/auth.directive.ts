@@ -25,13 +25,8 @@ export class AuthDirective {
 
     render() {
         let granted: boolean;
-        const identity = this.authRepository.identity;
-        
-        if(identity?.isFullAccess) {
-            granted = true;
-        }
-        else if (this.needleAccesses && this.needleAccesses.length > 0) {
-            granted = !!this.needleAccesses.find(x => identity?.accessibility.includes(x))
+        if (this.needleAccesses && this.needleAccesses.length > 0) {
+            granted = this.needleAccesses.some(x => this.authRepository.hasAccess(x));
         } else {
             granted = true;
         }

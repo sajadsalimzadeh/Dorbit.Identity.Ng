@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable, tap } from "rxjs";
-import { UserBase, UserEditRequest, UserPrivilege, UserVerifyRequest } from "../contracts/user";
+import { UserBase, UserEditRequest, UserMinimal, UserPrivilege, UserVerifyRequest } from "../contracts/user";
 import { BASE_API_URL_IDENTITY } from "../configs";
 import { BaseCrudRepository } from '@framework/repositories/base-crud.repository';
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
@@ -32,6 +32,10 @@ export class UserBaseRepository extends BaseCrudRepository {
         }));
     }
 
+    getAllMinimal(): Observable<QueryResult<UserMinimal[]>> {
+        return this.http.get<QueryResult<UserMinimal[]>>('Minimal');
+    }
+
     deActive(req: any) {
         return this.http.post<QueryResult<string[]>>(`${req.id}/DeActive`, req);
     }
@@ -57,7 +61,7 @@ export class UserBaseRepository extends BaseCrudRepository {
     }
 
     deletePrivilege(id: string, privilegeId: string) {
-        return this.http.delete<QueryResult<string[]>>(`${id}/Privileges/${privilegeId}`);
+        return this.http.delete<CommandResult>(`${id}/Privileges/${privilegeId}`);
     }
 
     getAllToken(id: string) {
