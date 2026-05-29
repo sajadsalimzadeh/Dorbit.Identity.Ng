@@ -21,6 +21,16 @@ export enum OtpType {
     Email = 2
 }
 
+export const OtpTypeLabels = {
+    [OtpType.Cellphone]: 'شماره تلفن',
+    [OtpType.Email]: 'ایمیل',
+} as const;
+
+export const OtpTypes = {
+    [OtpType.Cellphone]: 'Cellphone',
+    [OtpType.Email]: 'Email',
+}
+
 export interface AuthLoginWithOtpRequest {
     otpValidation: OtpValidateRequest;
 }

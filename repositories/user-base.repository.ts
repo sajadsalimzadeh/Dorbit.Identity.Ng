@@ -36,20 +36,20 @@ export class UserBaseRepository extends BaseCrudRepository {
         return this.http.get<QueryResult<UserMinimal[]>>('Minimal');
     }
 
-    deActive(req: any) {
-        return this.http.post<QueryResult<string[]>>(`${req.id}/DeActive`, req);
+    deActive(id: string, req: any) {
+        return this.http.post<QueryResult<string[]>>(`${id}/DeActive`, req);
     }
 
-    active(req: any) {
-        return this.http.post<QueryResult<string[]>>(`${req.id}/Active`, req);
+    active(id: string, req: any) {
+        return this.http.post<QueryResult<string[]>>(`${id}/Active`, req);
     }
 
-    resetPassword(req: any) {
-        return this.http.post<CommandResult>(`${req.id}/ResetPassword`, req);
+    resetPassword(id: string, req: { password: string }) {
+        return this.http.post<CommandResult>(`${id}/ResetPassword`, req);
     }
 
-    setMessage(req: any) {
-        return this.http.post<QueryResult>(`${req.id}/Message`, req);
+    setMessage(id: string, req: { message: string }) {
+        return this.http.post<QueryResult>(`${id}/Message`, req);
     }
 
     getAllPrivilege(id: string) {
