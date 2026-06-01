@@ -1,5 +1,5 @@
 import { OtpValidateRequest } from "./otp";
-import { User } from "./user";
+import { UserBase } from "./user";
 
 export interface AuthLoginWithPasswordRequest {
     username: string;
@@ -21,10 +21,18 @@ export enum OtpType {
     Email = 2
 }
 
+export const OtpTypeLabels = {
+    [OtpType.Cellphone]: 'شماره تلفن',
+    [OtpType.Email]: 'ایمیل',
+} as const;
+
+export const OtpTypes = {
+    [OtpType.Cellphone]: 'Cellphone',
+    [OtpType.Email]: 'Email',
+}
+
 export interface AuthLoginWithOtpRequest {
-    type: OtpType;
-    receiver: string;
-    code: string;
+    otpValidation: OtpValidateRequest;
 }
 
 export interface AuthRegisterRequest {
@@ -46,11 +54,11 @@ export interface AuthLoginResponse {
 }
 
 export interface LoginWithCodeRequest {
-    receiver: string;
-    code: string;
+
+    otpValidation: OtpValidateRequest;
 }
 
-export interface IdentityDto<T extends User = User> {
+export interface IdentityDto<T extends UserBase = UserBase> {
     user: T;
     isFullAccess:boolean;
     accessibility: string[];

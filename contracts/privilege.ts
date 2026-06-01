@@ -14,7 +14,7 @@ export interface UserPrivilegeSaveRequest {
     userId: string;
     from?: string;
     to?: string;
-    roleIds: string[];
-    accessibility: string[];
-    isFullAccess: boolean;
+    roleIds?: string[];
+    accessibility?: string[];
+    isFullAccess?: boolean;
 }

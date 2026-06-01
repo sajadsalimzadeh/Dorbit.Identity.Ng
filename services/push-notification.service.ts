@@ -1,5 +1,5 @@
 import { Inject, Injectable, InjectionToken, Injector } from '@angular/core';
-import { UserRepository } from '@identity/repositories/user.repository';
+import { UserBaseRepository } from '@identity/repositories/user-base.repository';
 import { SwPush } from '@angular/service-worker';
 import { UserNotifySubscriptionRequest, UserNotifySubscriptionType } from '@identity/contracts/notification';
 
@@ -8,7 +8,7 @@ export const WEB_PUSH_PUBLIC_KEY = new InjectionToken<string>('web-push-public-k
 @Injectable({ providedIn: 'root' })
 export class PushNotificationService {
 
-    constructor(private userRepository: UserRepository, @Inject(SwPush) private swPush: SwPush, @Inject(WEB_PUSH_PUBLIC_KEY) private webPushPublicKey: string) {
+    constructor(private userRepository: UserBaseRepository, @Inject(SwPush) private swPush: SwPush, @Inject(WEB_PUSH_PUBLIC_KEY) private webPushPublicKey: string) {
         this.swPush.messages.subscribe((message: any) => {
             console.log('Push message received:', message);
             // Notification.requestPermission().then(permission => {

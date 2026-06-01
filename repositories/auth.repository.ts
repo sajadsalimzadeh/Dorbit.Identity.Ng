@@ -24,19 +24,18 @@ export class AuthRepository extends BaseApiRepository {
         super(injector, injector.get(BASE_API_URL_IDENTITY), 'Auth');
     }
 
-    hasAccess(access: string) {
-        access = access.toLowerCase();
-        return this.identity.isFullAccess || this.identity.accessibility.some(x => x == access);
+    hasAccess(access: string | string[]) {
+        if(this.identity.isFullAccess) return true;
+        if(typeof access === 'string') {
+            access = access.toLowerCase();
+            return this.identity.accessibility.some(x => x == access);
+        } else {
+            return access.some(x => this.identity.accessibility.some(y => y.toLowerCase() == x.toLowerCase()));
+        }
     }
 
     getLoginInfo(params?: { firebaseToken?: string }) {
-        return this.http.get<QueryResult<IdentityDto>>('', { params: params ?? {} }).pipe(tap({
-            next: res => {
-                if (res.data) {
-                    this.identity = res.data;
-                }
-            },
-        }));
+        return this.http.get<QueryResult<IdentityDto>>('', { params: params ?? {} });
     }
 
     loginWithPassword(request: AuthLoginWithPasswordRequest, captchaReq: CaptchaValidateRequest) {

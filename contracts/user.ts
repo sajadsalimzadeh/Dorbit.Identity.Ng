@@ -1,6 +1,6 @@
 import { OtpType } from "./auth";
 
-export interface User {
+export interface UserBase {
     id: string;
     name: string;
     username: string;
@@ -25,11 +25,17 @@ export interface User {
     firebaseTokens: string[];
 }
 
+export interface UserMinimal {
+    id: string;
+    name: string;
+    username: string;
+}
 
 export interface UserEditRequest {
     name?: string;
     cellphone?: string;
     email?: string;
+    status?: UserStatus;
     thumbnailFilename?: string;
 }
 
@@ -54,8 +60,8 @@ export interface UserPrivilege {
     id: string;
     userId: string;
     tenantId?: string;
-    from?: Date;
-    to?: Date;
+    from?: string;
+    to?: string;
     isFullAccess?: boolean;
     roleIds?: string[];
     accessibility: string[];
