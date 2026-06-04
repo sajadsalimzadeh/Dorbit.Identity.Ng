@@ -1,4 +1,4 @@
-import { CommonModule } from "@angular/common";
+
 import { Component, forwardRef, Injector, Input } from "@angular/core";
 import { FormControl, NG_VALUE_ACCESSOR, ReactiveFormsModule } from "@angular/forms";
 import { TreeUtil } from "@framework/utils";
@@ -15,7 +15,7 @@ const listeners: ((accesses: Access[]) => void)[] = [];
 
 @Component({
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, TranslateModule, TreeSelectModule, IftaLabelModule],
+    imports: [ReactiveFormsModule, TranslateModule, TreeSelectModule, IftaLabelModule],
     selector: 'app-access-selector',
     templateUrl: './index.component.html',
     styleUrl: './index.component.scss',
