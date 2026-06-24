@@ -44,7 +44,7 @@ export class UserBaseRepository extends BaseCrudRepository {
         return this.http.post<QueryResult<string[]>>(`${id}/Active`, req);
     }
 
-    resetPassword(id: string, req: { password: string }) {
+    resetPassword(id: string, req: { password: string, isSendMessage?: boolean }) {
         return this.http.post<CommandResult>(`${id}/ResetPassword`, req);
     }
 
