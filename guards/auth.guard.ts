@@ -44,11 +44,12 @@ export class AuthGuard implements CanActivate {
 
                 resolve(loginInfoResult.success);
             } catch (e) {
+                reject(e);
+                
                 this.messageService.add({
                     severity: 'error',
                     detail: this.translateService.instant('message.authentication-failed')
                 });
-                reject(e);
 
                 if (e instanceof HttpErrorResponse && e.status != 401) {
                     setTimeout(() => {
