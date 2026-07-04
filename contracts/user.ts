@@ -7,12 +7,12 @@ export interface UserBase {
     code: number;
     hasPassword: boolean;
     cellphone: string;
-    cellphoneVerificationTime: Date;
+    cellphoneVerificationTime: string;
     email: string;
-    emailVerificationTime: Date;
+    emailVerificationTime: string;
     
     authenticatorKey: string;
-    authenticatorValidateTime: Date;
+    authenticatorValidateTime: string;
     thumbnailFilename: string;
     
     needResetPassword: boolean;
@@ -20,7 +20,7 @@ export interface UserBase {
     message: string;
     
     maxTokenCount: number;
-    creationTime: Date;
+    creationTime: string;
     accessibility: string[];
     firebaseTokens: string[];
 }
