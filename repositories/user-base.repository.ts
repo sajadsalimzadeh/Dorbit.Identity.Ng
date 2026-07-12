@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 import { Observable, tap } from "rxjs";
-import { UserBase, UserEditRequest, UserMinimal, UserPrivilege, UserVerifyRequest } from "../contracts/user";
+import { UserBase, UserBaseEditRequest, UserBaseMinimal, UserPrivilege, UserVerifyRequest } from "../contracts/user";
 import { BASE_API_URL_IDENTITY } from "../configs";
 import { BaseCrudRepository } from '@framework/repositories/base-crud.repository';
 import { CommandResult, PagedListResult, QueryResult } from '@framework/contracts/results';
@@ -32,16 +32,16 @@ export class UserBaseRepository extends BaseCrudRepository {
         }));
     }
 
-    getAllMinimal(): Observable<QueryResult<UserMinimal[]>> {
-        return this.http.get<QueryResult<UserMinimal[]>>('Minimal');
+    getAllMinimal(): Observable<QueryResult<UserBaseMinimal[]>> {
+        return this.http.get<QueryResult<UserBaseMinimal[]>>('Minimal');
     }
 
-    deActive(id: string, req: any) {
-        return this.http.post<QueryResult<string[]>>(`${id}/DeActive`, req);
+    deactive(id: string) {
+        return this.http.post<QueryResult<string[]>>(`${id}/DeActive`, {});
     }
 
-    active(id: string, req: any) {
-        return this.http.post<QueryResult<string[]>>(`${id}/Active`, req);
+    active(id: string) {
+        return this.http.post<QueryResult<string[]>>(`${id}/Active`, {});
     }
 
     resetPassword(id: string, req: { password: string, isSendMessage?: boolean }) {
@@ -84,7 +84,7 @@ export class UserBaseRepository extends BaseCrudRepository {
         return this.http.post<CommandResult>('Own/ChangePassword', req);
     }
 
-    editOwn(req: UserEditRequest) {
+    editOwn(req: UserBaseEditRequest) {
         return this.http.patch<QueryResult<IdentityDto>>('Own', req);
     }
 
