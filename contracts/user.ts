@@ -25,18 +25,44 @@ export interface UserBase {
     firebaseTokens: string[];
 }
 
-export interface UserMinimal {
+export interface UserBaseAddRequest {
+    name: string;
+    username: string;
+    password: string;
+    cellphone: string;
+    email: string;
+    authenticatorKey: string;
+    needResetPassword: boolean;
+    maxTokenCount: number;
+    roleIds: string[];
+    validateTypes: UserValidateTypes;
+    whiteListIps: string[];
+}
+
+export enum UserValidateTypes
+{
+    Cellphone = 1,
+    Email = 2,
+    Authenticator = 4
+}
+
+export interface UserBaseMinimal {
     id: string;
     name: string;
     username: string;
 }
 
-export interface UserEditRequest {
+export interface UserBaseEditOwnRequest {
     name?: string;
     cellphone?: string;
     email?: string;
-    status?: UserStatus;
     thumbnailFilename?: string;
+}
+
+export interface UserBaseEditRequest extends UserBaseEditOwnRequest {
+    username?: string;
+    needResetPassword?: boolean;
+    maxTokenCount?: number;
 }
 
 export enum UserStatus

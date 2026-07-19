@@ -30,6 +30,7 @@ const listeners: ((accesses: Access[]) => void)[] = [];
 export class AccessSelectorComponent extends PrimengControlComponent {
     @Input() label: string = 'access-selector.label';
     @Input() filterBy: string[] = [];
+    @Input() placeholder: string = 'Select access';
 
     innerControl = new FormControl<TreeNode[]>([]);
 
