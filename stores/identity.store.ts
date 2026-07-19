@@ -4,4 +4,4 @@ export interface IdentityStore {
     token: string;
 }
 
-export const identityStore = new Store<IdentityStore>('')
+export const identityStore = new Store<IdentityStore>('identity')
